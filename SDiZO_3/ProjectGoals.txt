@@ -1,0 +1,53 @@
+﻿Implementacja problemów kombinatorycznych:
+	a) Dyskretny problem plecakowy
+	b) Asymetryczny problem komiwojażera
+	Oba problemy w wersjach optymalizacyjnych.
+
+Problem plecakowy:
+	a) Parametry:
+		- zbiór przedmiotów, każdy ma:
+			rozmiar > 0
+			wartość > 0
+		- pojemność plecaka
+
+	b) Rozwiązanie to zbiór elementów maksymalizujący łączną wartość przedmiotów przy warunku nie przekroczenia dopuszczalnej pojemności plecaka.
+
+	c) Wszystkie liczby typu integer.
+
+	d) Algorytmy:
+		- przegląd zupełny
+		- algorytm zachłanny
+			dwa kryteria wyboru przedmiotów - wartość lub stosunek wartość/rozmiar
+		- algorytm oparty na programowaniu dynamicznym
+
+	e) Wczytywanie z pliku:
+		- pierwsza linia: [pojemność plecaka] [ilość przedmiotów]
+		- kolejnie linie: [rozmiar przedmiotu] [wartość przedmiotu]
+
+Problem komiwojażera:
+	a) Parametry:
+		- zbiór miast
+		- odległość z miasta A do B
+			Uwaga! odległość z A do B może być inna niż z B do A.
+
+	b) Rozwiązanie to zbiór zawierający miasta w kolejności ich odwiedzania tak aby sumaryczna trasa była jak najkrótsza.
+			Zakładamy że każde miasto zostało odwiedzone tylko raz i nastąpił powrót do miasta początkowego.
+
+	c) Wszystkie liczby typu integer.
+
+	d) Algorytmy:
+		- przegląd zupełny
+		- algorytm zachłanny
+			kryterium wyboru: minimalna odległość od ostatnio odwiedzonego miasta
+		- algorytm przeszukiwania lokalnego
+
+	e) Reprezentacja w postaci macierzy sąsiedztwa.
+
+	e) Wczytywanie z pliku:
+		- pierwsza linia: [liczba miast]
+		- kolejnie linie: [miasto] [odległości do wszystkich innych (tam gdzie jest obecne miasto = 0)]
+
+
+--> 4.0 – po dwa algorytmy z każdego problemu (możliwość wykorzystania z biblioteki STL)
+Ewentualnie jak starczy czasu:
+4.5 – po dwa algorytmy z każdego problemu (bez STL)
