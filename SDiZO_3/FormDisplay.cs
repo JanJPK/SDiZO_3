@@ -10,11 +10,12 @@ using System.Windows.Forms;
 
 namespace SDiZO_3
 {
-    public partial class Form1 : Form
+    public partial class FormDisplay : Form
     {
-        public Form1()
+        public FormDisplay(string graph) 
         {
             InitializeComponent();
+            textBoxDisplay.Text = graph;
         }
     }
 }
