@@ -16,20 +16,17 @@ namespace SDiZO_3.Knapsack
 
         public List<Item> Items { get; }
 
-        public KnapsackData(List<int> InputList)
+        public KnapsackData(List<int> inputList)
         {
-            // Pobieram interesujące mnie informacje z początku pliku i usuwam je bo nie będą już potrzebne.
-            Capacity = InputList[0];
-            InputList.RemoveAt(0);
-
-            ItemAmount = InputList[0];
-            InputList.RemoveAt(0);
+            // Pobieram interesujące mnie informacje z początku pliku.
+            Capacity = inputList[0];
+            ItemAmount = inputList[1];
 
             // Wypełnianie listy.
             Items = new List<Item>();
-            for (int i = 0; i < ItemAmount * 2; i += 2)
+            for (int i = 2; i <= ItemAmount * 2; i += 2)
             {
-                Items.Add(new Item(InputList[i], InputList[i + 1]));
+                Items.Add(new Item(inputList[i], inputList[i + 1]));
             }
 
 
@@ -42,9 +39,11 @@ namespace SDiZO_3.Knapsack
             sb.Append("Pojemność plecaka: " + Capacity + Environment.NewLine);
             sb.Append("Ilość przedmiotów: " + ItemAmount + Environment.NewLine);
             sb.Append("Dostępne przedmioty: " + Environment.NewLine);
+            int index = 0;
             foreach (Item item in Items)
             {
-                sb.Append(item + Environment.NewLine);
+                sb.Append(index + " - " + item + Environment.NewLine);
+                index++;
             }
             return sb.ToString();
         }
@@ -58,24 +57,30 @@ namespace SDiZO_3.Knapsack
             // Rozmiar.
             public int Size { get; }
 
+            // Stosunek.
+            public double Ratio { get; }
+
             public Item(int size, int value)
             {
                 Value = value;
                 Size = size;
+                Ratio = ValueRatio();
             }
 
             // Zwraca stosunek wartość/rozmiar.
-            public double ValueRatio()
+            public int ValueRatio()
             {
                 double ratio = Value / Size;
                 // Zaokrąglam do 2 miejsc po przecinku.
-                return Math.Round(ratio, 2);
+                //return Math.Round(ratio, 2);
+                return (int)ratio;
             }
 
+            // Konwersja do string.
             public override string ToString()
             {
                 // "R: <rozmiar>; W: <wartość>; R/W: <stosunek>;"
-                return "R: " + Size + "; W: " + Value + "; R/W: " + ValueRatio() + ";";
+                return "R: " + Size + "; W: " + Value + "; W/R: " + ValueRatio() + ";";
             }
         }
     }

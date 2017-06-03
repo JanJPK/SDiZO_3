@@ -34,6 +34,7 @@ namespace SDiZO_3
         private KnapsackData knapsackData;
         private KnapsackBruteforce knapsackBruteforce;
         private KnapsackGreedy knapsackGreedy;
+        private KnapsackDynamic knapsackDynamic;
 
         // Repetycja.
         private int repeat;
@@ -43,6 +44,9 @@ namespace SDiZO_3
         public FormMain()
         {
             InitializeComponent();
+            textBoxLoadDataFilename.Text = "ks_1";
+            radioButtonLoadDataKnapsack.Checked = true;
+            repeat = 1;
         }
 
         // ######## ######## ######## ######## Przyciski
@@ -52,17 +56,24 @@ namespace SDiZO_3
         {
             if (knapsackData != null)
             {
-                for (int i = 0; i < repeat; i++)
+                if (checkBoxKnapsackDynamic.Checked)
                 {
-                    if (checkBoxKnapsackBruteforce.Checked)
+                    for (int i = 0; i < repeat; i++)
                     {
-                        
+                        knapsackDynamic = new KnapsackDynamic(knapsackData);
+                        knapsackDynamic.Work();
                     }
 
-                    if (checkBoxKnapsackGreedy.Checked)
-                    {
+                }
 
+                if (checkBoxKnapsackGreedy.Checked)
+                {
+                    for (int i = 0; i < repeat; i++)
+                    {
+                        knapsackGreedy = new KnapsackGreedy(knapsackData, true);
+                        knapsackGreedy.Work();
                     }
+
                 }
             }
             else
@@ -73,12 +84,13 @@ namespace SDiZO_3
         }
         //
         //
-        // Wyświetlanie wyniku plecakowego - przegląd zupełny.
-        private void buttonKnapsackBruteforce_Click(object sender, EventArgs e)
+        // Wyświetlanie wyniku plecakowego - programowanie dynamiczne.
+        private void buttonKnapsackDynamic_Click(object sender, EventArgs e)
         {
-            if (knapsackBruteforce != null)
+            if (knapsackDynamic != null)
             {
-
+                FormDisplay fD = new FormDisplay(knapsackDynamic.ToString());
+                fD.Show();
             }
             else
             {
@@ -93,7 +105,8 @@ namespace SDiZO_3
         {
             if (knapsackGreedy != null)
             {
-
+                FormDisplay fD = new FormDisplay(knapsackGreedy.ToString());
+                fD.Show();
             }
             else
             {
@@ -108,18 +121,22 @@ namespace SDiZO_3
         {
             if (salesmanData != null)
             {
-                for (int i = 0; i < repeat; i++)
+                if (checkBoxSalesmanBruteforce.Checked)
                 {
-                    if (checkBoxSalesmanBruteforce.Checked)
-                    {
-
-                    }
-
-                    if (checkBoxSalesmanGreedy.Checked)
+                    for (int i = 0; i < repeat; i++)
                     {
 
                     }
                 }
+
+                if (checkBoxSalesmanGreedy.Checked)
+                {
+                    for (int i = 0; i < repeat; i++)
+                    {
+
+                    }
+                }
+
             }
             else
             {
@@ -163,6 +180,14 @@ namespace SDiZO_3
         private void buttonLoadData_Click(object sender, EventArgs e)
         {
             ReadFile(textBoxLoadDataFilename.Text);
+            if (radioButtonLoadDataKnapsack.Checked)
+            {
+                knapsackData = new KnapsackData(InputList);
+            }
+            else
+            {
+                salesmanData = new SalesmanData(InputList);
+            }
         }
         //
         //
@@ -171,22 +196,24 @@ namespace SDiZO_3
         {
             if (radioButtonLoadDataKnapsack.Checked)
             {
-                if (knapsackData != null)
-                {
-                    FormDisplay fD = new FormDisplay(knapsackData.ToString());
-                    fD.Show();
-                }
+
+                knapsackData = new KnapsackData(InputList);
+                FormDisplay fD = new FormDisplay(knapsackData.ToString());
+                fD.Show();
+                knapsackData = null;
+
             }
             else
             {
-                if (salesmanData != null)
-                {
-                    FormDisplay fD = new FormDisplay(salesmanData.ToString());
-                    fD.Show();
-                }
+
+                salesmanData = new SalesmanData(InputList);
+                FormDisplay fD = new FormDisplay(salesmanData.ToString());
+                fD.Show();
+                salesmanData = null;
+
             }
         }
-        #endregion
+        #endregion 
 
         // ######## ######## ######## ######## Funkcje
         #region
@@ -244,7 +271,6 @@ namespace SDiZO_3
             }
 
         }
-
         #endregion
 
 

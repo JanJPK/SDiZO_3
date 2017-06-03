@@ -20,21 +20,16 @@ namespace SDiZO_3.Salesman
             // InputList[0] = ilość miast.
             Size = InputList[0];
             matrix = new int[Size, Size];
-
-            // Usuwam pierwszą liczbę bo jest mi już zbędna.
-            InputList.RemoveAt(0);
-
-            // Teraz InputList[0] = początek macierzy.
             // W każdym wierszu jest [Size] liczb.
             // Początek wiersza + [Size] = początek kolejnego wiersza.
-            int index = 0;
-            for (int i = 0; i < Size; i += Size)
+            int firstInRow = 1; // Index pierwszego elementu w wierszu.
+            for (int i = 0; i < Size; i ++)
             {
-                for (int j = i; j < i + Size; j++)
+                for (int j = firstInRow; j < Size + firstInRow; j++)
                 {
-                    matrix[index, j] = InputList[j];
+                    matrix[i, j - firstInRow] = InputList[j];
                 }
-                index++;
+                firstInRow += Size;
             }
         }
     
@@ -46,7 +41,7 @@ namespace SDiZO_3.Salesman
             sb.Append("Dostępne miasta: " + Environment.NewLine);
             for (int i = 0; i < Size; i++)
             {
-                sb.Append("{" + i + "} - ");
+                sb.Append("" + i + " - ");
                 for (int j = 0; j < Size; j++)
                 {
                     sb.Append("[" + matrix[i, j] + "]  ");

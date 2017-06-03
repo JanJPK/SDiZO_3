@@ -38,10 +38,10 @@
             this.groupBoxKnapsack = new System.Windows.Forms.GroupBox();
             this.textBoxKnapsackGreedy = new System.Windows.Forms.TextBox();
             this.checkBoxKnapsackGreedy = new System.Windows.Forms.CheckBox();
-            this.checkBoxKnapsackBruteforce = new System.Windows.Forms.CheckBox();
+            this.checkBoxKnapsackDynamic = new System.Windows.Forms.CheckBox();
             this.buttonKnapsackGreedy = new System.Windows.Forms.Button();
-            this.textBoxKnapsackBruteforce = new System.Windows.Forms.TextBox();
-            this.buttonKnapsackBruteforce = new System.Windows.Forms.Button();
+            this.textBoxKnapsackDynamic = new System.Windows.Forms.TextBox();
+            this.buttonKnapsackDynamic = new System.Windows.Forms.Button();
             this.buttonKnapsackStart = new System.Windows.Forms.Button();
             this.groupBoxSalesman = new System.Windows.Forms.GroupBox();
             this.textBoxSalesmanGreedy = new System.Windows.Forms.TextBox();
@@ -140,10 +140,10 @@
             this.groupBoxKnapsack.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.groupBoxKnapsack.Controls.Add(this.textBoxKnapsackGreedy);
             this.groupBoxKnapsack.Controls.Add(this.checkBoxKnapsackGreedy);
-            this.groupBoxKnapsack.Controls.Add(this.checkBoxKnapsackBruteforce);
+            this.groupBoxKnapsack.Controls.Add(this.checkBoxKnapsackDynamic);
             this.groupBoxKnapsack.Controls.Add(this.buttonKnapsackGreedy);
-            this.groupBoxKnapsack.Controls.Add(this.textBoxKnapsackBruteforce);
-            this.groupBoxKnapsack.Controls.Add(this.buttonKnapsackBruteforce);
+            this.groupBoxKnapsack.Controls.Add(this.textBoxKnapsackDynamic);
+            this.groupBoxKnapsack.Controls.Add(this.buttonKnapsackDynamic);
             this.groupBoxKnapsack.Controls.Add(this.buttonKnapsackStart);
             this.groupBoxKnapsack.Location = new System.Drawing.Point(12, 100);
             this.groupBoxKnapsack.Name = "groupBoxKnapsack";
@@ -169,15 +169,15 @@
             this.checkBoxKnapsackGreedy.Text = "Greedy";
             this.checkBoxKnapsackGreedy.UseVisualStyleBackColor = true;
             // 
-            // checkBoxKnapsackBruteforce
+            // checkBoxKnapsackDynamic
             // 
-            this.checkBoxKnapsackBruteforce.AutoSize = true;
-            this.checkBoxKnapsackBruteforce.Location = new System.Drawing.Point(12, 16);
-            this.checkBoxKnapsackBruteforce.Name = "checkBoxKnapsackBruteforce";
-            this.checkBoxKnapsackBruteforce.Size = new System.Drawing.Size(75, 17);
-            this.checkBoxKnapsackBruteforce.TabIndex = 12;
-            this.checkBoxKnapsackBruteforce.Text = "Bruteforce";
-            this.checkBoxKnapsackBruteforce.UseVisualStyleBackColor = true;
+            this.checkBoxKnapsackDynamic.AutoSize = true;
+            this.checkBoxKnapsackDynamic.Location = new System.Drawing.Point(12, 16);
+            this.checkBoxKnapsackDynamic.Name = "checkBoxKnapsackDynamic";
+            this.checkBoxKnapsackDynamic.Size = new System.Drawing.Size(67, 17);
+            this.checkBoxKnapsackDynamic.TabIndex = 12;
+            this.checkBoxKnapsackDynamic.Text = "Dynamic";
+            this.checkBoxKnapsackDynamic.UseVisualStyleBackColor = true;
             // 
             // buttonKnapsackGreedy
             // 
@@ -189,22 +189,22 @@
             this.buttonKnapsackGreedy.UseVisualStyleBackColor = true;
             this.buttonKnapsackGreedy.Click += new System.EventHandler(this.buttonKnapsackGreedy_Click);
             // 
-            // textBoxKnapsackBruteforce
+            // textBoxKnapsackDynamic
             // 
-            this.textBoxKnapsackBruteforce.Location = new System.Drawing.Point(85, 16);
-            this.textBoxKnapsackBruteforce.Name = "textBoxKnapsackBruteforce";
-            this.textBoxKnapsackBruteforce.Size = new System.Drawing.Size(90, 20);
-            this.textBoxKnapsackBruteforce.TabIndex = 10;
+            this.textBoxKnapsackDynamic.Location = new System.Drawing.Point(85, 16);
+            this.textBoxKnapsackDynamic.Name = "textBoxKnapsackDynamic";
+            this.textBoxKnapsackDynamic.Size = new System.Drawing.Size(90, 20);
+            this.textBoxKnapsackDynamic.TabIndex = 10;
             // 
-            // buttonKnapsackBruteforce
+            // buttonKnapsackDynamic
             // 
-            this.buttonKnapsackBruteforce.Location = new System.Drawing.Point(178, 14);
-            this.buttonKnapsackBruteforce.Name = "buttonKnapsackBruteforce";
-            this.buttonKnapsackBruteforce.Size = new System.Drawing.Size(70, 23);
-            this.buttonKnapsackBruteforce.TabIndex = 6;
-            this.buttonKnapsackBruteforce.Text = "Wypisz";
-            this.buttonKnapsackBruteforce.UseVisualStyleBackColor = true;
-            this.buttonKnapsackBruteforce.Click += new System.EventHandler(this.buttonKnapsackBruteforce_Click);
+            this.buttonKnapsackDynamic.Location = new System.Drawing.Point(178, 14);
+            this.buttonKnapsackDynamic.Name = "buttonKnapsackDynamic";
+            this.buttonKnapsackDynamic.Size = new System.Drawing.Size(70, 23);
+            this.buttonKnapsackDynamic.TabIndex = 6;
+            this.buttonKnapsackDynamic.Text = "Wypisz";
+            this.buttonKnapsackDynamic.UseVisualStyleBackColor = true;
+            this.buttonKnapsackDynamic.Click += new System.EventHandler(this.buttonKnapsackDynamic_Click);
             // 
             // buttonKnapsackStart
             // 
@@ -371,10 +371,10 @@
         private System.Windows.Forms.GroupBox groupBoxKnapsack;
         private System.Windows.Forms.TextBox textBoxKnapsackGreedy;
         private System.Windows.Forms.CheckBox checkBoxKnapsackGreedy;
-        private System.Windows.Forms.CheckBox checkBoxKnapsackBruteforce;
+        private System.Windows.Forms.CheckBox checkBoxKnapsackDynamic;
         private System.Windows.Forms.Button buttonKnapsackGreedy;
-        private System.Windows.Forms.TextBox textBoxKnapsackBruteforce;
-        private System.Windows.Forms.Button buttonKnapsackBruteforce;
+        private System.Windows.Forms.TextBox textBoxKnapsackDynamic;
+        private System.Windows.Forms.Button buttonKnapsackDynamic;
         private System.Windows.Forms.Button buttonKnapsackStart;
         private System.Windows.Forms.GroupBox groupBoxSalesman;
         private System.Windows.Forms.TextBox textBoxSalesmanGreedy;
