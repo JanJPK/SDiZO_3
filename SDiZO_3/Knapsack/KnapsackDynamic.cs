@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SDiZO_3.Utility;
 
 namespace SDiZO_3.Knapsack
 {
@@ -22,7 +23,6 @@ namespace SDiZO_3.Knapsack
         // Macierz na wyniki.
         private int[,] matrix;
 
-
         public KnapsackDynamic(KnapsackData inputData)
         {
             data = inputData;
@@ -32,12 +32,7 @@ namespace SDiZO_3.Knapsack
             matrix = new int[data.Items.Count + 1, data.Capacity + 1];
         }
 
-        // Zwraca większą.
-        private T ReturnGreater<T>(T a, T b) where T : System.IComparable<T>
-        {
-            //return (a > b) ? a : b;
-            return a.CompareTo(b) > 0 ? a : b;
-        }
+
 
         // Praca.
         public void Work()
@@ -53,9 +48,10 @@ namespace SDiZO_3.Knapsack
                     }
                     else
                     {
+                        // Czy nowy przedmiot zmieści się?
                         if (data.Items[i - 1].Size <= j)
                         {
-                            matrix[i, j] = ReturnGreater(data.Items[i - 1].Value + matrix[i - 1, (j - data.Items[i - 1].Size)],
+                            matrix[i, j] = MyGenerics.ReturnGreater(data.Items[i - 1].Value + matrix[i - 1, (j - data.Items[i - 1].Size)],
                                 matrix[i - 1, j]);
                         }
                         else
@@ -92,8 +88,6 @@ namespace SDiZO_3.Knapsack
                 sb.Append("" + i + " - ");
                 for (int j = 0; j < data.Capacity + 1; j++)
                 {
-                    //string dupa = string.Format("[{0, -10}]", matrix[i, j]);
-                    //sb.Append(dupa);
                     sb.Append("[" + matrix[i, j] + "]  ");
                 }
                 sb.Append(Environment.NewLine);

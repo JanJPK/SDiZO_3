@@ -68,12 +68,12 @@ namespace SDiZO_3.Knapsack
             }
 
             // Zwraca stosunek wartość/rozmiar.
-            public int ValueRatio()
+            public double ValueRatio()
             {
                 double ratio = Value / Size;
                 // Zaokrąglam do 2 miejsc po przecinku.
                 //return Math.Round(ratio, 2);
-                return (int)ratio;
+                return ratio;
             }
 
             // Konwersja do string.

@@ -30,6 +30,7 @@ namespace SDiZO_3
         private SalesmanData salesmanData;
         private SalesmanBruteforce salesmanBruteforce;
         private SalesmanGreedy salesmanGreedy;
+        private SalesmanDynamic salesmanDynamic;
 
         private KnapsackData knapsackData;
         private KnapsackBruteforce knapsackBruteforce;
@@ -44,8 +45,14 @@ namespace SDiZO_3
         public FormMain()
         {
             InitializeComponent();
-            textBoxLoadDataFilename.Text = "ks_1";
-            radioButtonLoadDataKnapsack.Checked = true;
+            textBoxLoadDataFilename.Text = "tsp_6_1";
+            //radioButtonLoadDataKnapsack.Checked = true;
+            radioButtonLoadDataSalesman.Checked = true;
+            //checkBoxKnapsackDynamic.Checked = true;
+            //checkBoxKnapsackGreedy.Checked = true;
+            //checkBoxSalesmanDynamic.Checked = true;
+            //checkBoxSalesmanGreedy.Checked = true;
+            checkBoxSalesmanBruteforce.Checked = true;
             repeat = 1;
         }
 
@@ -70,10 +77,19 @@ namespace SDiZO_3
                 {
                     for (int i = 0; i < repeat; i++)
                     {
-                        knapsackGreedy = new KnapsackGreedy(knapsackData, true);
+                        knapsackGreedy = new KnapsackGreedy(knapsackData, false);
                         knapsackGreedy.Work();
                     }
 
+                }
+
+                if (checkBoxKnapsackBruteforce.Checked)
+                {
+                    for (int i = 0; i < repeat; i++)
+                    {
+                        knapsackBruteforce = new KnapsackBruteforce(knapsackData);
+                        knapsackBruteforce.Work();
+                    }
                 }
             }
             else
@@ -84,12 +100,12 @@ namespace SDiZO_3
         }
         //
         //
-        // Wyświetlanie wyniku plecakowego - programowanie dynamiczne.
-        private void buttonKnapsackDynamic_Click(object sender, EventArgs e)
+        // Wyświetlanie wyniku plecakowego - przegląd zupełny.
+        private void buttonKnapsackBruteforce_Click(object sender, EventArgs e)
         {
-            if (knapsackDynamic != null)
+            if (knapsackBruteforce != null)
             {
-                FormDisplay fD = new FormDisplay(knapsackDynamic.ToString());
+                FormDisplay fD = new FormDisplay(knapsackBruteforce.ToString());
                 fD.Show();
             }
             else
@@ -116,16 +132,33 @@ namespace SDiZO_3
         }
         //
         //
+        // Wyświetlanie wyniku plecakowego - programowanie dynamiczne.
+        private void buttonKnapsackDynamic_Click(object sender, EventArgs e)
+        {
+            if (knapsackDynamic != null)
+            {
+                FormDisplay fD = new FormDisplay(knapsackDynamic.ToString());
+                fD.Show();
+            }
+            else
+            {
+                MessageBox.Show("Nie ma czego wyświetlać!", "Błąd",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        //
+        //
         // Start komiwojażera.
         private void buttonSalesman_Click(object sender, EventArgs e)
         {
             if (salesmanData != null)
             {
-                if (checkBoxSalesmanBruteforce.Checked)
+                if (checkBoxSalesmanDynamic.Checked)
                 {
                     for (int i = 0; i < repeat; i++)
                     {
-
+                        salesmanDynamic = new SalesmanDynamic(salesmanData);
+                        salesmanDynamic.Work();
                     }
                 }
 
@@ -133,7 +166,17 @@ namespace SDiZO_3
                 {
                     for (int i = 0; i < repeat; i++)
                     {
+                        salesmanGreedy = new SalesmanGreedy(salesmanData);
+                        salesmanGreedy.Work();
+                    }
+                }
 
+                if (checkBoxSalesmanBruteforce.Checked)
+                {
+                    for (int i = 0; i < repeat; i++)
+                    {
+                        salesmanBruteforce = new SalesmanBruteforce(salesmanData);
+                        salesmanBruteforce.Work();
                     }
                 }
 
@@ -151,7 +194,8 @@ namespace SDiZO_3
         {
             if (salesmanBruteforce != null)
             {
-
+                FormDisplay fD = new FormDisplay(salesmanBruteforce.ToString());
+                fD.Show();
             }
             else
             {
@@ -166,7 +210,24 @@ namespace SDiZO_3
         {
             if (salesmanGreedy != null)
             {
-
+                FormDisplay fD = new FormDisplay(salesmanGreedy.ToString());
+                fD.Show();
+            }
+            else
+            {
+                MessageBox.Show("Nie ma czego wyświetlać!", "Błąd",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        //
+        //
+        // Wyświetlanie wyniku komiwojażera - programowanie dynamiczne.
+        private void buttonSalesmanDynamic_Click(object sender, EventArgs e)
+        {
+            if (salesmanDynamic != null)
+            {
+                FormDisplay fD = new FormDisplay(salesmanDynamic.ToString());
+                fD.Show();
             }
             else
             {
@@ -200,8 +261,6 @@ namespace SDiZO_3
                 knapsackData = new KnapsackData(InputList);
                 FormDisplay fD = new FormDisplay(knapsackData.ToString());
                 fD.Show();
-                knapsackData = null;
-
             }
             else
             {
@@ -209,11 +268,13 @@ namespace SDiZO_3
                 salesmanData = new SalesmanData(InputList);
                 FormDisplay fD = new FormDisplay(salesmanData.ToString());
                 fD.Show();
-                salesmanData = null;
-
             }
         }
-        #endregion 
+        #endregion
+
+
+
+
 
         // ######## ######## ######## ######## Funkcje
         #region
@@ -271,6 +332,7 @@ namespace SDiZO_3
             }
 
         }
+
         #endregion
 
 
