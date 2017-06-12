@@ -30,7 +30,7 @@ namespace SDiZO_3
         private SalesmanData salesmanData;
         private SalesmanBruteforce salesmanBruteforce;
         private SalesmanGreedy salesmanGreedy;
-        private SalesmanDynamic salesmanDynamic;
+        private SalesmanTwoOpt salesmanTwoOpt;
 
         private KnapsackData knapsackData;
         private KnapsackBruteforce knapsackBruteforce;
@@ -45,13 +45,13 @@ namespace SDiZO_3
         public FormMain()
         {
             InitializeComponent();
-            textBoxLoadDataFilename.Text = "tsp_6_1";
+            textBoxLoadDataFilename.Text = "tsp_6_2";
             //radioButtonLoadDataKnapsack.Checked = true;
             radioButtonLoadDataSalesman.Checked = true;
             //checkBoxKnapsackDynamic.Checked = true;
             //checkBoxKnapsackGreedy.Checked = true;
-            //checkBoxSalesmanDynamic.Checked = true;
-            //checkBoxSalesmanGreedy.Checked = true;
+            checkBoxSalesmanTwoOpt.Checked = true;
+            checkBoxSalesmanGreedy.Checked = true;
             checkBoxSalesmanBruteforce.Checked = true;
             repeat = 1;
         }
@@ -75,9 +75,18 @@ namespace SDiZO_3
 
                 if (checkBoxKnapsackGreedy.Checked)
                 {
+                    bool mode;
+                    if (radioButtonKnapsackGreedyWeight.Checked)
+                    {
+                        mode = true;
+                    }
+                    else
+                    {
+                        mode = false;
+                    }
                     for (int i = 0; i < repeat; i++)
                     {
-                        knapsackGreedy = new KnapsackGreedy(knapsackData, false);
+                        knapsackGreedy = new KnapsackGreedy(knapsackData, mode);
                         knapsackGreedy.Work();
                     }
 
@@ -153,12 +162,12 @@ namespace SDiZO_3
         {
             if (salesmanData != null)
             {
-                if (checkBoxSalesmanDynamic.Checked)
+                if (checkBoxSalesmanTwoOpt.Checked)
                 {
                     for (int i = 0; i < repeat; i++)
                     {
-                        salesmanDynamic = new SalesmanDynamic(salesmanData);
-                        salesmanDynamic.Work();
+                        salesmanTwoOpt = new SalesmanTwoOpt(salesmanData);
+                        salesmanTwoOpt.Work();
                     }
                 }
 
@@ -222,11 +231,11 @@ namespace SDiZO_3
         //
         //
         // Wyświetlanie wyniku komiwojażera - programowanie dynamiczne.
-        private void buttonSalesmanDynamic_Click(object sender, EventArgs e)
+        private void buttonSalesmanTwoOpt_Click(object sender, EventArgs e)
         {
-            if (salesmanDynamic != null)
+            if (salesmanTwoOpt != null)
             {
-                FormDisplay fD = new FormDisplay(salesmanDynamic.ToString());
+                FormDisplay fD = new FormDisplay(salesmanTwoOpt.ToString());
                 fD.Show();
             }
             else

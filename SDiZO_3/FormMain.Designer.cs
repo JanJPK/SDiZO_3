@@ -36,9 +36,6 @@
             this.buttonDisplayData = new System.Windows.Forms.Button();
             this.textBoxLoadDataFilename = new System.Windows.Forms.TextBox();
             this.groupBoxKnapsack = new System.Windows.Forms.GroupBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.textBoxKnapsackBruteforce = new System.Windows.Forms.TextBox();
             this.checkBoxKnapsackBruteforce = new System.Windows.Forms.CheckBox();
             this.buttonKnapsackBruteforce = new System.Windows.Forms.Button();
@@ -58,15 +55,17 @@
             this.buttonSalesmanBruteforce = new System.Windows.Forms.Button();
             this.textBoxSalesmanGreedy = new System.Windows.Forms.TextBox();
             this.checkBoxSalesmanGreedy = new System.Windows.Forms.CheckBox();
-            this.checkBoxSalesmanDynamic = new System.Windows.Forms.CheckBox();
+            this.checkBoxSalesmanTwoOpt = new System.Windows.Forms.CheckBox();
             this.buttonSalesmanGreedy = new System.Windows.Forms.Button();
-            this.textBoxSalesmanDynamic = new System.Windows.Forms.TextBox();
-            this.buttonSalesmanDynamic = new System.Windows.Forms.Button();
+            this.textBoxSalesmanTwoOpt = new System.Windows.Forms.TextBox();
+            this.buttonSalesmanTwoOpt = new System.Windows.Forms.Button();
             this.buttonSalesman = new System.Windows.Forms.Button();
             this.groupBoxCreate = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.checkBoxCreateGraphDirected = new System.Windows.Forms.CheckBox();
             this.buttonCreateNewGraph = new System.Windows.Forms.Button();
+            this.radioButtonKnapsackGreedyWeight = new System.Windows.Forms.RadioButton();
+            this.radioButtonKnapsackGreedyRatio = new System.Windows.Forms.RadioButton();
             this.groupBoxLoadData.SuspendLayout();
             this.groupBoxKnapsack.SuspendLayout();
             this.groupBoxSalesman.SuspendLayout();
@@ -150,9 +149,8 @@
             // groupBoxKnapsack
             // 
             this.groupBoxKnapsack.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.groupBoxKnapsack.Controls.Add(this.textBox3);
-            this.groupBoxKnapsack.Controls.Add(this.checkBox2);
-            this.groupBoxKnapsack.Controls.Add(this.button2);
+            this.groupBoxKnapsack.Controls.Add(this.radioButtonKnapsackGreedyRatio);
+            this.groupBoxKnapsack.Controls.Add(this.radioButtonKnapsackGreedyWeight);
             this.groupBoxKnapsack.Controls.Add(this.textBoxKnapsackBruteforce);
             this.groupBoxKnapsack.Controls.Add(this.checkBoxKnapsackBruteforce);
             this.groupBoxKnapsack.Controls.Add(this.buttonKnapsackBruteforce);
@@ -170,35 +168,9 @@
             this.groupBoxKnapsack.TabStop = false;
             this.groupBoxKnapsack.Text = "Plecak";
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(84, 94);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(90, 20);
-            this.textBox3.TabIndex = 20;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(11, 94);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(40, 17);
-            this.checkBox2.TabIndex = 19;
-            this.checkBox2.Text = "XX";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(177, 92);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(70, 23);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "Wypisz";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // textBoxKnapsackBruteforce
             // 
-            this.textBoxKnapsackBruteforce.Location = new System.Drawing.Point(84, 68);
+            this.textBoxKnapsackBruteforce.Location = new System.Drawing.Point(85, 94);
             this.textBoxKnapsackBruteforce.Name = "textBoxKnapsackBruteforce";
             this.textBoxKnapsackBruteforce.Size = new System.Drawing.Size(90, 20);
             this.textBoxKnapsackBruteforce.TabIndex = 17;
@@ -206,7 +178,7 @@
             // checkBoxKnapsackBruteforce
             // 
             this.checkBoxKnapsackBruteforce.AutoSize = true;
-            this.checkBoxKnapsackBruteforce.Location = new System.Drawing.Point(11, 68);
+            this.checkBoxKnapsackBruteforce.Location = new System.Drawing.Point(12, 94);
             this.checkBoxKnapsackBruteforce.Name = "checkBoxKnapsackBruteforce";
             this.checkBoxKnapsackBruteforce.Size = new System.Drawing.Size(75, 17);
             this.checkBoxKnapsackBruteforce.TabIndex = 16;
@@ -215,7 +187,7 @@
             // 
             // buttonKnapsackBruteforce
             // 
-            this.buttonKnapsackBruteforce.Location = new System.Drawing.Point(177, 66);
+            this.buttonKnapsackBruteforce.Location = new System.Drawing.Point(178, 92);
             this.buttonKnapsackBruteforce.Name = "buttonKnapsackBruteforce";
             this.buttonKnapsackBruteforce.Size = new System.Drawing.Size(70, 23);
             this.buttonKnapsackBruteforce.TabIndex = 15;
@@ -298,10 +270,10 @@
             this.groupBoxSalesman.Controls.Add(this.buttonSalesmanBruteforce);
             this.groupBoxSalesman.Controls.Add(this.textBoxSalesmanGreedy);
             this.groupBoxSalesman.Controls.Add(this.checkBoxSalesmanGreedy);
-            this.groupBoxSalesman.Controls.Add(this.checkBoxSalesmanDynamic);
+            this.groupBoxSalesman.Controls.Add(this.checkBoxSalesmanTwoOpt);
             this.groupBoxSalesman.Controls.Add(this.buttonSalesmanGreedy);
-            this.groupBoxSalesman.Controls.Add(this.textBoxSalesmanDynamic);
-            this.groupBoxSalesman.Controls.Add(this.buttonSalesmanDynamic);
+            this.groupBoxSalesman.Controls.Add(this.textBoxSalesmanTwoOpt);
+            this.groupBoxSalesman.Controls.Add(this.buttonSalesmanTwoOpt);
             this.groupBoxSalesman.Controls.Add(this.buttonSalesman);
             this.groupBoxSalesman.Location = new System.Drawing.Point(12, 254);
             this.groupBoxSalesman.Name = "groupBoxSalesman";
@@ -380,15 +352,15 @@
             this.checkBoxSalesmanGreedy.Text = "Greedy";
             this.checkBoxSalesmanGreedy.UseVisualStyleBackColor = true;
             // 
-            // checkBoxSalesmanDynamic
+            // checkBoxSalesmanTwoOpt
             // 
-            this.checkBoxSalesmanDynamic.AutoSize = true;
-            this.checkBoxSalesmanDynamic.Location = new System.Drawing.Point(12, 16);
-            this.checkBoxSalesmanDynamic.Name = "checkBoxSalesmanDynamic";
-            this.checkBoxSalesmanDynamic.Size = new System.Drawing.Size(67, 17);
-            this.checkBoxSalesmanDynamic.TabIndex = 12;
-            this.checkBoxSalesmanDynamic.Text = "Dynamic";
-            this.checkBoxSalesmanDynamic.UseVisualStyleBackColor = true;
+            this.checkBoxSalesmanTwoOpt.AutoSize = true;
+            this.checkBoxSalesmanTwoOpt.Location = new System.Drawing.Point(12, 16);
+            this.checkBoxSalesmanTwoOpt.Name = "checkBoxSalesmanTwoOpt";
+            this.checkBoxSalesmanTwoOpt.Size = new System.Drawing.Size(64, 17);
+            this.checkBoxSalesmanTwoOpt.TabIndex = 12;
+            this.checkBoxSalesmanTwoOpt.Text = "TwoOpt";
+            this.checkBoxSalesmanTwoOpt.UseVisualStyleBackColor = true;
             // 
             // buttonSalesmanGreedy
             // 
@@ -400,22 +372,22 @@
             this.buttonSalesmanGreedy.UseVisualStyleBackColor = true;
             this.buttonSalesmanGreedy.Click += new System.EventHandler(this.buttonSalesmanGreedy_Click);
             // 
-            // textBoxSalesmanDynamic
+            // textBoxSalesmanTwoOpt
             // 
-            this.textBoxSalesmanDynamic.Location = new System.Drawing.Point(85, 16);
-            this.textBoxSalesmanDynamic.Name = "textBoxSalesmanDynamic";
-            this.textBoxSalesmanDynamic.Size = new System.Drawing.Size(90, 20);
-            this.textBoxSalesmanDynamic.TabIndex = 10;
+            this.textBoxSalesmanTwoOpt.Location = new System.Drawing.Point(85, 16);
+            this.textBoxSalesmanTwoOpt.Name = "textBoxSalesmanTwoOpt";
+            this.textBoxSalesmanTwoOpt.Size = new System.Drawing.Size(90, 20);
+            this.textBoxSalesmanTwoOpt.TabIndex = 10;
             // 
-            // buttonSalesmanDynamic
+            // buttonSalesmanTwoOpt
             // 
-            this.buttonSalesmanDynamic.Location = new System.Drawing.Point(178, 14);
-            this.buttonSalesmanDynamic.Name = "buttonSalesmanDynamic";
-            this.buttonSalesmanDynamic.Size = new System.Drawing.Size(70, 23);
-            this.buttonSalesmanDynamic.TabIndex = 6;
-            this.buttonSalesmanDynamic.Text = "Wypisz";
-            this.buttonSalesmanDynamic.UseVisualStyleBackColor = true;
-            this.buttonSalesmanDynamic.Click += new System.EventHandler(this.buttonSalesmanDynamic_Click);
+            this.buttonSalesmanTwoOpt.Location = new System.Drawing.Point(178, 14);
+            this.buttonSalesmanTwoOpt.Name = "buttonSalesmanTwoOpt";
+            this.buttonSalesmanTwoOpt.Size = new System.Drawing.Size(70, 23);
+            this.buttonSalesmanTwoOpt.TabIndex = 6;
+            this.buttonSalesmanTwoOpt.Text = "Wypisz";
+            this.buttonSalesmanTwoOpt.UseVisualStyleBackColor = true;
+            this.buttonSalesmanTwoOpt.Click += new System.EventHandler(this.buttonSalesmanTwoOpt_Click);
             // 
             // buttonSalesman
             // 
@@ -466,6 +438,28 @@
             this.buttonCreateNewGraph.Text = "Twórz";
             this.buttonCreateNewGraph.UseVisualStyleBackColor = true;
             // 
+            // radioButtonKnapsackGreedyWeight
+            // 
+            this.radioButtonKnapsackGreedyWeight.AutoSize = true;
+            this.radioButtonKnapsackGreedyWeight.Location = new System.Drawing.Point(85, 68);
+            this.radioButtonKnapsackGreedyWeight.Name = "radioButtonKnapsackGreedyWeight";
+            this.radioButtonKnapsackGreedyWeight.Size = new System.Drawing.Size(36, 17);
+            this.radioButtonKnapsackGreedyWeight.TabIndex = 18;
+            this.radioButtonKnapsackGreedyWeight.TabStop = true;
+            this.radioButtonKnapsackGreedyWeight.Text = "W";
+            this.radioButtonKnapsackGreedyWeight.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonKnapsackGreedyRatio
+            // 
+            this.radioButtonKnapsackGreedyRatio.AutoSize = true;
+            this.radioButtonKnapsackGreedyRatio.Location = new System.Drawing.Point(126, 68);
+            this.radioButtonKnapsackGreedyRatio.Name = "radioButtonKnapsackGreedyRatio";
+            this.radioButtonKnapsackGreedyRatio.Size = new System.Drawing.Size(49, 17);
+            this.radioButtonKnapsackGreedyRatio.TabIndex = 19;
+            this.radioButtonKnapsackGreedyRatio.TabStop = true;
+            this.radioButtonKnapsackGreedyRatio.Text = "W/R";
+            this.radioButtonKnapsackGreedyRatio.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -509,18 +503,15 @@
         private System.Windows.Forms.GroupBox groupBoxSalesman;
         private System.Windows.Forms.TextBox textBoxSalesmanGreedy;
         private System.Windows.Forms.CheckBox checkBoxSalesmanGreedy;
-        private System.Windows.Forms.CheckBox checkBoxSalesmanDynamic;
+        private System.Windows.Forms.CheckBox checkBoxSalesmanTwoOpt;
         private System.Windows.Forms.Button buttonSalesmanGreedy;
-        private System.Windows.Forms.TextBox textBoxSalesmanDynamic;
-        private System.Windows.Forms.Button buttonSalesmanDynamic;
+        private System.Windows.Forms.TextBox textBoxSalesmanTwoOpt;
+        private System.Windows.Forms.Button buttonSalesmanTwoOpt;
         private System.Windows.Forms.Button buttonSalesman;
         private System.Windows.Forms.GroupBox groupBoxCreate;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.CheckBox checkBoxCreateGraphDirected;
         private System.Windows.Forms.Button buttonCreateNewGraph;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBoxKnapsackBruteforce;
         private System.Windows.Forms.CheckBox checkBoxKnapsackBruteforce;
         private System.Windows.Forms.Button buttonKnapsackBruteforce;
@@ -530,6 +521,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBoxSalesmanBruteforce;
         private System.Windows.Forms.Button buttonSalesmanBruteforce;
+        private System.Windows.Forms.RadioButton radioButtonKnapsackGreedyRatio;
+        private System.Windows.Forms.RadioButton radioButtonKnapsackGreedyWeight;
     }
 }
 

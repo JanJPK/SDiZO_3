@@ -34,8 +34,8 @@ namespace SDiZO_3.Salesman
         }
         
 
-        // Zwraca koszt danej permutacji miast.
-        public int PermutationCost(List<int> permutation)
+        // Zwraca dystans danej permutacji miast.
+        public int PermutationDistance(List<int> permutation)
         {
             int previousCity = 0;
             int sum = 0;
@@ -44,6 +44,7 @@ namespace SDiZO_3.Salesman
                 sum += Matrix[previousCity, permutation[i]];
                 previousCity = permutation[i];
             }
+            // Połączenie osattniego z pierwszym.
             sum += Matrix[previousCity, 0];
 
             return sum;

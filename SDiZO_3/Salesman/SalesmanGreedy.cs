@@ -13,13 +13,19 @@ namespace SDiZO_3.Salesman
          * Start od 0.
          * Wersja aproksymacyjna.
          * Kryterium wyboru - najmniejsza odległość od ostatnio wybranego miasta.
+         * Idę do A. Gdzie najbliżej z A? B.
+         * Idę do B. Gdzie najbliżej z B? C.
+         *              . . . 
          */
 
         // Lista z optymalną (aproksymacja) drogą.
         private List<int> minRoute;
 
         // Całkowity koszt minRoute.
-        private int minRouteSum;
+        private int minDistance;
+
+        // Tablica odwiedzonych miast.
+        private bool[] visitedCities;
 
         // Dane wejściowe.
         private SalesmanData data;
@@ -28,30 +34,42 @@ namespace SDiZO_3.Salesman
         {
             data = inputData;
             minRoute = new List<int>();
+            visitedCities = new bool[data.Size];
+            for (int i = 0; i < visitedCities.Length; i++)
+            {
+                visitedCities[i] = false;
+            }
         }
 
         // Praca.
         public void Work()
         {
+            // Ostatnio odwiedzone miasto czyli 0.
             int currentCity = 0;
+            visitedCities[0] = true;
+            // Aż nie przejdzie wszystkich miast:
             while (minRoute.Count < data.Size - 1)
             {
-                // TODO: wykluczyć już odwiedzone miasta.
-                currentCity = FindClosest(currentCity);
+                // Idź do najbliższego miasta od ostatnio odwiedzonego.
+                currentCity = FindClosestNotVisited(currentCity);
+                // Dodaj do trasy i uzupełnij w tablicy.
                 minRoute.Add(currentCity);
+                visitedCities[currentCity] = true;
             }
-            minRouteSum = data.PermutationCost(minRoute);
+            minDistance = data.PermutationDistance(minRoute);
 
         }
 
         // Zwraca najtańsze połączenie z danego miasta.
-        public int FindClosest(int startingCity)
+        public int FindClosestNotVisited(int startingCity)
         {
             int closestCity = 0;
             int min = Int32.MaxValue;
+            // Przeszukiwanie liniowe.
+            // TODO: usprawnić.
             for (int i = 0; i < data.Size; i++)
             {
-                if (i != startingCity)
+                if (i != startingCity && visitedCities[i] == false)
                 {
                     if (data.Matrix[startingCity, i] < min)
                     {
@@ -81,7 +99,7 @@ namespace SDiZO_3.Salesman
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("Problem komiwojażera - algorytm zachłanny." + Environment.NewLine);
-            sb.Append("Suma wag: " + minRouteSum + Environment.NewLine);
+            sb.Append("Suma wag: " + minDistance + Environment.NewLine);
             sb.Append("Droga: " + Environment.NewLine);
             int previous = 0;
             foreach (int i in minRoute)

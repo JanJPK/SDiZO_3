@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SDiZO_3.Utility;
 
 namespace SDiZO_3.Knapsack
 {
@@ -19,16 +20,49 @@ namespace SDiZO_3.Knapsack
         // Lista wyjściowa.
         private List<KnapsackData.Item> chosenItems;
 
+        // Całkowity koszt chosenItems.
+        private int chosenItemsSum;
+
         public KnapsackBruteforce(KnapsackData inputData)
         {
             data = inputData;
             chosenItems = new List<KnapsackData.Item>();
+            chosenItemsSum = 0;
         }
 
         // Praca.
         public void Work()
         {
-            throw new NotImplementedException();
+            // Podejście z komiwojażera nie zadziała ze względu na ograniczenie pojemności. 
+            // TODO: przerobić.
+            /*
+            // Lista wszystkich permutacji.
+            List<List<KnapsackData.Item>> permutations = MyGenerics.AllPermutations(data.Items);
+
+            int permutationSum;
+            // Sprawdzamy która permutacja jest najlepsza.
+            foreach (List<KnapsackData.Item> permutation in permutations)
+            {
+                // Jeżeli koszt tej permutacji jest mniejszy od obecnego min, obecna permutacja = min.
+                permutationSum = SumItemValue(permutation);
+                if (permutationSum > chosenItemsSum)
+                {
+                    chosenItems = permutation;
+                    chosenItemsSum = permutationSum;
+                }
+            }
+            */
+        }
+
+        // Sumowanie wartości przedmiotów.
+        private int SumItemValue(List<KnapsackData.Item> inputList)
+        {
+            int sum = 0;
+            foreach (KnapsackData.Item item in inputList)
+            {
+                sum += item.Value;
+            }
+            return sum;
         }
 
         // Zwracanie typu algorytmu jako string.

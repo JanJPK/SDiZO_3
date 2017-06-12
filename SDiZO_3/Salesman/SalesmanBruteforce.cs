@@ -13,13 +13,19 @@ namespace SDiZO_3.Salesman
          * Start od 0.
          * Wersja optymalna - sprawdza wszystkie kombinacje i wybiera najlepszą.
          * Paskudna złożoność obliczeniowa O(n!).
+         * Idea - wariacje tablicy bool gdzie:
+         *      index - ID przedmiotu
+         *      true -> przedmiot w plecaku
+         *      false -> przedmiot nie jest w plecaku
+         * Sprawdzamy które kombinacje się mieszczą i która najlepsza.
+         * Wariacje z powtórzeniami (n^k).
          */
 
         // Lista z optymalną drogą.
         private List<int> minRoute;
 
-        // Całkowity koszt minRoute.
-        private int minRouteSum;
+        // Całkowity dystans minRoute.
+        private int minDistance;
 
         // Dane wejściowe.
         private SalesmanData data;
@@ -27,31 +33,34 @@ namespace SDiZO_3.Salesman
         public SalesmanBruteforce(SalesmanData inputData)
         {
             data = inputData;
-            minRoute = new List<int>();
+            
         }
 
         // Praca.
         public void Work()
         {
-            // O jeden mniejsze ponieważ zawsze startujemy od 0 - takie założenia projektu.
-            List<int> cities = new List<int>();
+            // O jeden mniejsze ponieważ zawsze startujemy od 0; nie zawiera początku i końca.
+            // Dlaczego? Ułatwia permutacje dla zadanego przypadku.
+            List<int> route = new List<int>();
+            minDistance = Int32.MaxValue;
             for (int i = 0; i < data.Size - 1; i++)
             {
-                cities.Add(i + 1);
-                minRouteSum = Int32.MaxValue;
+                route.Add(i + 1);
             }
 
-            List<List<int>> permutations = MyGenerics.AllPermutations(cities);
+            // Lista wszystkich permutacji.
+            List<List<int>> permutations = MyGenerics.AllPermutations(route);
 
+            int permutationCost;
             // Sprawdzamy która permutacja jest "najtańsza".
             foreach (List<int> permutation in permutations)
             {
                 // Jeżeli koszt tej permutacji jest mniejszy od obecnego min, obecna permutacja = min.
-                int permutationCost = data.PermutationCost(permutation);
-                if (permutationCost < minRouteSum)
+                permutationCost = data.PermutationDistance(permutation);
+                if (permutationCost < minDistance)
                 {
                     minRoute = permutation;
-                    minRouteSum = permutationCost;
+                    minDistance = permutationCost;
                 }
             }
         }
@@ -74,7 +83,7 @@ namespace SDiZO_3.Salesman
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("Problem komiwojażera - przegląd zupełny." + Environment.NewLine);
-            sb.Append("Suma wag: " + minRouteSum + Environment.NewLine);
+            sb.Append("Suma wag: " + minDistance + Environment.NewLine);
             sb.Append("Droga: " + Environment.NewLine);
             int previous = 0;
             foreach (int i in minRoute)
