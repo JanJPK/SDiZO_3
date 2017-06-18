@@ -100,6 +100,7 @@ namespace SDiZO_3.Knapsack
             {
                 sb.Append("Wartość/waga." + Environment.NewLine);
             }
+            sb.Append("Pojemność plecaka: " + data.Capacity + Environment.NewLine);
             sb.Append("Suma wartości: " + chosenItems.Sum(o => o.Value) + Environment.NewLine);
             sb.Append("Wybrane przedmioty: " + Environment.NewLine);
 

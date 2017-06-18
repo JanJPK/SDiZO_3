@@ -32,7 +32,6 @@ namespace SDiZO_3.Salesman
                 firstInRow += Size;
             }
         }
-        
 
         // Zwraca dystans danej permutacji miast.
         public int PermutationDistance(List<int> permutation)
@@ -44,11 +43,12 @@ namespace SDiZO_3.Salesman
                 sum += Matrix[previousCity, permutation[i]];
                 previousCity = permutation[i];
             }
-            // Połączenie osattniego z pierwszym.
+            // Połączenie ostatniego z pierwszym.
             sum += Matrix[previousCity, 0];
 
             return sum;
         }
+
         // Konwersja do string.
         public override string ToString()
         {

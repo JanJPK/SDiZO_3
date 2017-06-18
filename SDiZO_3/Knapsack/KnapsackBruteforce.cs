@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,12 @@ namespace SDiZO_3.Knapsack
         /*
          * Wersja optymalna - sprawdza wszystkie kombinacje i wybiera najlepszą.
          * Paskudna złożoność obliczeniowa O(2^n).
+         * Idea - wariacje tablicy bool gdzie:
+         *      index - ID przedmiotu
+         *      true -> przedmiot w plecaku
+         *      false -> przedmiot nie jest w plecaku
+         * Sprawdzamy które kombinacje się mieszczą i która najlepsza.
+         * Jak to zrobić? Wszystkie liczby w postaci binarnej od 0 do 2^n - 1.
          */
 
         // Dane wejściowe.
@@ -28,30 +35,59 @@ namespace SDiZO_3.Knapsack
             data = inputData;
             chosenItems = new List<KnapsackData.Item>();
             chosenItemsSum = 0;
+            intToBinary(6);
+        }
+
+        // Zwraca tablicę 32 true/false - postać bitowa.
+        private BitArray intToBinary(int number)
+        {
+            return new BitArray(new int[] { number });
         }
 
         // Praca.
         public void Work()
         {
-            // Podejście z komiwojażera nie zadziała ze względu na ograniczenie pojemności. 
-            // TODO: przerobić.
-            /*
-            // Lista wszystkich permutacji.
-            List<List<KnapsackData.Item>> permutations = MyGenerics.AllPermutations(data.Items);
-
-            int permutationSum;
-            // Sprawdzamy która permutacja jest najlepsza.
-            foreach (List<KnapsackData.Item> permutation in permutations)
+            // Tworzenie tablicy tablic - tablica to postać bitowa obecnego indeksu.
+            int twoPower = (int)Math.Pow(2, data.ItemAmount);
+            BitArray[] bitArrays = new BitArray[twoPower];
+            for (int i = 0; i < twoPower; i++)
             {
-                // Jeżeli koszt tej permutacji jest mniejszy od obecnego min, obecna permutacja = min.
-                permutationSum = SumItemValue(permutation);
-                if (permutationSum > chosenItemsSum)
-                {
-                    chosenItems = permutation;
-                    chosenItemsSum = permutationSum;
-                }
+                bitArrays[i] = intToBinary(i);
             }
-            */
+
+            // Sprawdzenie każdej kombinacji i wybranie najlepszej.
+            List<KnapsackData.Item> combination;
+            int combinationValue;
+            int combinationSize;
+            foreach (BitArray ba in bitArrays)
+            {
+                combination = new List<KnapsackData.Item>();
+                combinationValue = 0;
+                combinationSize = 0;
+                // Sprawdzenie każdego bitu od pierwszego do ilości przedmiotów.
+                for (int i = 0; i < data.ItemAmount; i++)
+                {
+                    if (ba[i] == true)
+                    {
+                        combination.Add(data.Items[i]);
+                        combinationValue += data.Items[i].Value;
+                        combinationSize += data.Items[i].Size;
+                    }
+
+                    // Jeżeli ta kombinacja zmieści się w plecaku...
+                    if (combinationSize <= data.Capacity)
+                    {
+                        // ...sprawdź czy jest lepsza od obecnie wybranej i zamień jeżeli tak.
+                        if (combinationValue > chosenItemsSum)
+                        {
+                            chosenItems = new List<KnapsackData.Item>(combination);
+                            chosenItemsSum = combinationValue;
+                        }
+                    }
+                
+                }
+
+            }
         }
 
         // Sumowanie wartości przedmiotów.
@@ -82,6 +118,7 @@ namespace SDiZO_3.Knapsack
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("Problem plecakowy - algorytm brute-force." + Environment.NewLine);
+            sb.Append("Pojemność plecaka: " + data.Capacity + Environment.NewLine);
             sb.Append("Suma wartości: " + chosenItems.Sum(o => o.Value) + Environment.NewLine);
             sb.Append("Wybrane przedmioty: " + Environment.NewLine);
 

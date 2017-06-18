@@ -45,14 +45,21 @@ namespace SDiZO_3
         public FormMain()
         {
             InitializeComponent();
-            textBoxLoadDataFilename.Text = "tsp_6_2";
-            //radioButtonLoadDataKnapsack.Checked = true;
-            radioButtonLoadDataSalesman.Checked = true;
-            //checkBoxKnapsackDynamic.Checked = true;
-            //checkBoxKnapsackGreedy.Checked = true;
+
+            //textBoxLoadDataFilename.Text = "tsp_6_2";
+            //radioButtonLoadDataSalesman.Checked = true;
+
             checkBoxSalesmanTwoOpt.Checked = true;
             checkBoxSalesmanGreedy.Checked = true;
             checkBoxSalesmanBruteforce.Checked = true;
+
+            textBoxLoadDataFilename.Text = "ks_1";
+            radioButtonLoadDataKnapsack.Checked = true;
+
+            //checkBoxKnapsackDynamic.Checked = true;
+            //checkBoxKnapsackGreedy.Checked = true;
+            checkBoxKnapsackBruteforce.Checked = true;
+
             repeat = 1;
         }
 

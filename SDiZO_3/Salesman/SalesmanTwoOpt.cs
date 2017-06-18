@@ -42,6 +42,7 @@ namespace SDiZO_3.Salesman
             }
 
             // Wykonuje tak długo aż droga zostaje polepszana.
+            // improvementsCount - tylko do debugu gdy sprawdzałem z ciekawości ile razy poprawiał ścieżke.
             // int improvementsCount = 0;
             int improvements;
             do

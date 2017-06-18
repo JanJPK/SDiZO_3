@@ -13,12 +13,6 @@ namespace SDiZO_3.Salesman
          * Start od 0.
          * Wersja optymalna - sprawdza wszystkie kombinacje i wybiera najlepszą.
          * Paskudna złożoność obliczeniowa O(n!).
-         * Idea - wariacje tablicy bool gdzie:
-         *      index - ID przedmiotu
-         *      true -> przedmiot w plecaku
-         *      false -> przedmiot nie jest w plecaku
-         * Sprawdzamy które kombinacje się mieszczą i która najlepsza.
-         * Wariacje z powtórzeniami (n^k).
          */
 
         // Lista z optymalną drogą.
