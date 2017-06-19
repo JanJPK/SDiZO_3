@@ -51,3 +51,6 @@ Problem komiwojażera:
 --> 4.0 – po dwa algorytmy z każdego problemu (możliwość wykorzystania z biblioteki STL)
 Ewentualnie jak starczy czasu:
 4.5 – po dwa algorytmy z każdego problemu (bez STL)
+
+-- po uzgodnieniu na konsultacjach --
+--> 5.5 - 7 algorytmów (bazowe 6 + wyżarzanie dla komiwojażera)

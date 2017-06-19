@@ -7,7 +7,7 @@ using SDiZO_3.Utility;
 
 namespace SDiZO_3.Salesman
 {
-    class SalesmanBruteforce
+    class SalesmanBruteforce : ISDiZOable
     {
         /*
          * Start od 0.

@@ -110,13 +110,13 @@ namespace SDiZO_3.Salesman
         // Zwracanie typu algorytmu jako string.
         public string Type()
         {
-            throw new NotImplementedException();
+            return "Salesman TwoOpt";
         }
 
         // Zwracanie nazwy pliku.
         public string Filename()
         {
-            throw new NotImplementedException();
+            return "S2opt";
         }
 
         // Zwracanie wyniku jako string.

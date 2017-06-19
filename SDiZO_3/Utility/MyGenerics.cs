@@ -20,6 +20,7 @@ namespace SDiZO_3.Utility
         }
 
         // Zwraca większą.
+        // Już niepotrzebne i nie jest do końca prawdziwe => mogą być równe.
         public static T ReturnGreater<T>(T a, T b) where T : System.IComparable<T>
         {
             //return (a > b) ? a : b;

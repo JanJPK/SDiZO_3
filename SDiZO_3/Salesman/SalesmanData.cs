@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SDiZO_3.Utility;
 
 namespace SDiZO_3.Salesman
 {

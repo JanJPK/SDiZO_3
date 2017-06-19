@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SDiZO_3.Knapsack;
 using SDiZO_3.Salesman;
+using SDiZO_3.Utility;
 
 namespace SDiZO_3
 {
@@ -31,11 +32,24 @@ namespace SDiZO_3
         private SalesmanBruteforce salesmanBruteforce;
         private SalesmanGreedy salesmanGreedy;
         private SalesmanTwoOpt salesmanTwoOpt;
+        //private SalesmanXX salesmanXX;
+
+        private Clock salesmanBruteforceClock;
+        private Clock salesmanGreedyClock;
+        private Clock salesmanTwoOptClock;
+        //private Clock salesmanXXClock;
 
         private KnapsackData knapsackData;
         private KnapsackBruteforce knapsackBruteforce;
-        private KnapsackGreedy knapsackGreedy;
+        private KnapsackGreedy knapsackGreedyW; // Zachłanny na wartość.
+        private KnapsackGreedy knapsackGreedyR; // Zachłanny na stosunek wartość/waga.
         private KnapsackDynamic knapsackDynamic;
+
+        private Clock knapsackBruteforceClock;
+        private Clock knapsackGreedyWClock;
+        private Clock knapsackGreedyRClock;
+        private Clock knapsackDynamicClock;
+
 
         // Repetycja.
         private int repeat;
@@ -56,11 +70,17 @@ namespace SDiZO_3
             textBoxLoadDataFilename.Text = "ks_1";
             radioButtonLoadDataKnapsack.Checked = true;
 
-            //checkBoxKnapsackDynamic.Checked = true;
-            //checkBoxKnapsackGreedy.Checked = true;
+            checkBoxKnapsackDynamic.Checked = true;
+            checkBoxKnapsackGreedyW.Checked = true;
+            checkBoxKnapsackGreedyR.Checked = true;
             checkBoxKnapsackBruteforce.Checked = true;
 
+            textBoxDataGeneratorSize.Text = "100";
+            textBoxDataGeneratorSizeKnapsack.Text = "100";
+            radioButtonDataGeneratorKnapsack.Checked = true;
+
             repeat = 1;
+            textBoxRepeatCurrent.Text = repeat.ToString();
         }
 
         // ######## ######## ######## ######## Przyciski
@@ -72,40 +92,63 @@ namespace SDiZO_3
             {
                 if (checkBoxKnapsackDynamic.Checked)
                 {
+                    knapsackDynamic = new KnapsackDynamic(knapsackData);
+                    knapsackDynamicClock = new Clock(knapsackDynamic);
                     for (int i = 0; i < repeat; i++)
                     {
                         knapsackDynamic = new KnapsackDynamic(knapsackData);
+                        knapsackDynamicClock.Start();
                         knapsackDynamic.Work();
+                        knapsackDynamicClock.Stop();
                     }
-
+                    knapsackDynamicClock.End();
+                    textBoxKnapsackDynamic.Text = knapsackDynamicClock.Average().ToString();
                 }
 
-                if (checkBoxKnapsackGreedy.Checked)
+                if (checkBoxKnapsackGreedyW.Checked)
                 {
-                    bool mode;
-                    if (radioButtonKnapsackGreedyWeight.Checked)
-                    {
-                        mode = true;
-                    }
-                    else
-                    {
-                        mode = false;
-                    }
+                    knapsackGreedyW = new KnapsackGreedy(knapsackData, true);
+                    knapsackGreedyWClock = new Clock(knapsackGreedyW);
                     for (int i = 0; i < repeat; i++)
                     {
-                        knapsackGreedy = new KnapsackGreedy(knapsackData, mode);
-                        knapsackGreedy.Work();
+                        knapsackGreedyW = new KnapsackGreedy(knapsackData, true);
+                        knapsackGreedyWClock.Start();
+                        knapsackGreedyW.Work();
+                        knapsackGreedyWClock.Stop();
                     }
+                    knapsackGreedyWClock.End();
+                    textBoxKnapsackGreedyW.Text = knapsackGreedyWClock.Average().ToString();
+                }
+
+                if (checkBoxKnapsackGreedyR.Checked)
+                {
+                    knapsackGreedyR = new KnapsackGreedy(knapsackData, false);
+                    knapsackGreedyRClock = new Clock(knapsackGreedyR);
+                    for (int i = 0; i < repeat; i++)
+                    {
+                        knapsackGreedyR = new KnapsackGreedy(knapsackData, false);
+                        knapsackGreedyRClock.Start();
+                        knapsackGreedyR.Work();
+                        knapsackGreedyRClock.Stop();
+                    }
+                    knapsackGreedyRClock.End();
+                    textBoxKnapsackGreedyR.Text = knapsackGreedyRClock.Average().ToString();
 
                 }
 
                 if (checkBoxKnapsackBruteforce.Checked)
                 {
+                    knapsackBruteforce = new KnapsackBruteforce(knapsackData);
+                    knapsackBruteforceClock = new Clock(knapsackBruteforce);
                     for (int i = 0; i < repeat; i++)
                     {
                         knapsackBruteforce = new KnapsackBruteforce(knapsackData);
+                        knapsackBruteforceClock.Start();
                         knapsackBruteforce.Work();
+                        knapsackBruteforceClock.Stop();
                     }
+                    knapsackBruteforceClock.End();
+                    textBoxKnapsackBruteforce.Text = knapsackBruteforceClock.Average().ToString();
                 }
             }
             else
@@ -132,12 +175,28 @@ namespace SDiZO_3
         }
         //
         //
-        // Wyświetlanie wyniku plecakowego - zachłanny.
-        private void buttonKnapsackGreedy_Click(object sender, EventArgs e)
+        // Wyświetlanie wyniku plecakowego - zachłanny na wartość.
+        private void buttonKnapsackGreedyW_Click(object sender, EventArgs e)
         {
-            if (knapsackGreedy != null)
+            if (knapsackGreedyW != null)
             {
-                FormDisplay fD = new FormDisplay(knapsackGreedy.ToString());
+                FormDisplay fD = new FormDisplay(knapsackGreedyW.ToString());
+                fD.Show();
+            }
+            else
+            {
+                MessageBox.Show("Nie ma czego wyświetlać!", "Błąd",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        //
+        //
+        // Wyświetlanie wyniku plecakowego - zachłanny na stosunek.
+        private void buttonKnapsackGreedyR_Click(object sender, EventArgs e)
+        {
+            if (knapsackGreedyR != null)
+            {
+                FormDisplay fD = new FormDisplay(knapsackGreedyR.ToString());
                 fD.Show();
             }
             else
@@ -164,6 +223,32 @@ namespace SDiZO_3
         }
         //
         //
+        // Wyświetlanie wszytkich wyników - plecak.
+        private void buttonKnapsackAll_Click(object sender, EventArgs e)
+        {
+            if (knapsackBruteforce != null)
+            {
+                FormDisplay fD = new FormDisplay(knapsackBruteforce.ToString());
+                fD.Show();
+            }
+            if (knapsackGreedyW != null)
+            {
+                FormDisplay fD = new FormDisplay(knapsackGreedyW.ToString());
+                fD.Show();
+            }
+            if (knapsackGreedyR != null)
+            {
+                FormDisplay fD = new FormDisplay(knapsackGreedyR.ToString());
+                fD.Show();
+            }
+            if (knapsackDynamic != null)
+            {
+                FormDisplay fD = new FormDisplay(knapsackDynamic.ToString());
+                fD.Show();
+            }
+        }
+        //
+        //
         // Start komiwojażera.
         private void buttonSalesman_Click(object sender, EventArgs e)
         {
@@ -174,8 +259,13 @@ namespace SDiZO_3
                     for (int i = 0; i < repeat; i++)
                     {
                         salesmanTwoOpt = new SalesmanTwoOpt(salesmanData);
+                        salesmanTwoOptClock = new Clock(salesmanTwoOpt);
+                        salesmanTwoOptClock.Start();
                         salesmanTwoOpt.Work();
+                        salesmanTwoOptClock.Stop();
                     }
+                    salesmanTwoOptClock.End();
+                    textBoxSalesmanTwoOpt.Text = salesmanTwoOptClock.Average().ToString();
                 }
 
                 if (checkBoxSalesmanGreedy.Checked)
@@ -183,8 +273,13 @@ namespace SDiZO_3
                     for (int i = 0; i < repeat; i++)
                     {
                         salesmanGreedy = new SalesmanGreedy(salesmanData);
+                        salesmanGreedyClock = new Clock(salesmanGreedy);
+                        salesmanGreedyClock.Start();
                         salesmanGreedy.Work();
+                        salesmanGreedyClock.Stop();
                     }
+                    salesmanGreedyClock.End();
+                    textBoxSalesmanGreedy.Text = salesmanGreedyClock.Average().ToString();
                 }
 
                 if (checkBoxSalesmanBruteforce.Checked)
@@ -192,8 +287,13 @@ namespace SDiZO_3
                     for (int i = 0; i < repeat; i++)
                     {
                         salesmanBruteforce = new SalesmanBruteforce(salesmanData);
+                        salesmanBruteforceClock = new Clock(salesmanBruteforce);
+                        salesmanBruteforceClock.Start();
                         salesmanBruteforce.Work();
+                        salesmanBruteforceClock.Stop();
                     }
+                    salesmanBruteforceClock.End();
+                    textBoxSalesmanBruteforce.Text = salesmanBruteforceClock.Average().ToString();
                 }
 
             }
@@ -253,6 +353,27 @@ namespace SDiZO_3
         }
         //
         //
+        // Wyświetlanie wszystkich wyników - komiwjoażer.
+        private void buttonSalesmanAll_Click(object sender, EventArgs e)
+        {
+            if (salesmanBruteforce != null)
+            {
+                FormDisplay fD = new FormDisplay(salesmanBruteforce.ToString());
+                fD.Show();
+            }
+            if (salesmanTwoOpt != null)
+            {
+                FormDisplay fD = new FormDisplay(salesmanTwoOpt.ToString());
+                fD.Show();
+            }
+            if (salesmanGreedy != null)
+            {
+                FormDisplay fD = new FormDisplay(salesmanGreedy.ToString());
+                fD.Show();
+            }
+        }
+        //
+        //
         // Wczytywanie danych.
         private void buttonLoadData_Click(object sender, EventArgs e)
         {
@@ -273,25 +394,94 @@ namespace SDiZO_3
         {
             if (radioButtonLoadDataKnapsack.Checked)
             {
-
-                knapsackData = new KnapsackData(InputList);
-                FormDisplay fD = new FormDisplay(knapsackData.ToString());
-                fD.Show();
+                if (knapsackData != null)
+                {
+                    //knapsackData = new KnapsackData(InputList);
+                    FormDisplay fD = new FormDisplay(knapsackData.ToString());
+                    fD.Show();
+                }
             }
             else
             {
-
-                salesmanData = new SalesmanData(InputList);
-                FormDisplay fD = new FormDisplay(salesmanData.ToString());
-                fD.Show();
+                if (salesmanData != null)
+                {
+                    //salesmanData = new SalesmanData(InputList);
+                    FormDisplay fD = new FormDisplay(salesmanData.ToString());
+                    fD.Show();
+                }
             }
         }
+        //
+        //
+        // Zmiana koloru textBox z nazwą pliku przy zmianie tekstu.
+        private void textBoxLoadDataFilename_TextChanged(object sender, EventArgs e)
+        {
+            textBoxLoadDataFilename.BackColor = SystemColors.Window;
+        }
         #endregion
+        //
+        //
+        // Tworzenie danych.
+        private void buttonDataGenerator_Click(object sender, EventArgs e)
+        {
+            if (radioButtonDataGeneratorKnapsack.Checked)
+            {
+                int size;
+                if (!int.TryParse(textBoxDataGeneratorSize.Text, out size))
+                {
+                    MessageBox.Show("Nieprawidłowa liczba", "Błąd",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    knapsackData = null;
+                    return;
+                }
+                int sizeKnapsack;
+                if (!int.TryParse(textBoxDataGeneratorSizeKnapsack.Text, out sizeKnapsack))
+                {
+                    MessageBox.Show("Nieprawidłowa liczba", "Błąd",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    knapsackData = null;
+                    return;
+                }
 
+                knapsackData = new KnapsackData(DataGenerator.Knapsack(size, sizeKnapsack));
+                radioButtonLoadDataKnapsack.Checked = true;
+            }
+            else
+            {
+                int size;
+                if (!int.TryParse(textBoxDataGeneratorSize.Text, out size))
+                {
+                    MessageBox.Show("Nieprawidłowa liczba", "Błąd",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    salesmanData = null;
+                    return;
+                }
 
-
-
-
+                salesmanData = new SalesmanData(DataGenerator.Salesman(size));
+                radioButtonLoadDataSalesman.Checked = true;
+            }
+            textBoxLoadDataFilename.BackColor = Color.MediumAquamarine;
+            textBoxLoadDataFilename.Text = "RANDOM";
+        }
+        //
+        //
+        // Zmiana mnożnika
+        private void buttonRepeatChange_Click(object sender, EventArgs e)
+        {
+            int repeatNew;
+            if (!int.TryParse(textBoxRepeatNew.Text, out repeatNew))
+            {
+                MessageBox.Show("Nieprawidłowy mnożnik", "Błąd",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                InputList = null;
+                return;
+            }
+            repeat = repeatNew;
+            textBoxRepeatCurrent.Text = repeat.ToString();
+            textBoxRepeatNew.Text = "";
+        }
+        //
+        //
         // ######## ######## ######## ######## Funkcje
         #region
 
@@ -348,6 +538,7 @@ namespace SDiZO_3
             }
 
         }
+
 
         #endregion
 

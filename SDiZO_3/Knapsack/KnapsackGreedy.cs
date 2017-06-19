@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SDiZO_3.Utility;
 
 namespace SDiZO_3.Knapsack
 {
-    class KnapsackGreedy
+    class KnapsackGreedy : ISDiZOable
     {
         /*
          * Wersja aproksymacyjna - nie zawsze wynik będzie optymalny.
@@ -78,13 +79,22 @@ namespace SDiZO_3.Knapsack
         // Zwracanie typu algorytmu jako string.
         public string Type()
         {
-            return "Knapsack Greedy";
+            if (mode)
+            {
+                return "Knapsack Greedy W";
+            }
+            return "Knapsack Greedy R";
         }
 
         // Zwracanie nazwy pliku.
         public string Filename()
         {
-            return "KGreedy";
+            if (mode)
+            {
+                return "Knapsack Greedy R";
+            
+            }
+            return "KGreedyR";
         }
 
         // Zwracanie wyniku jako string.
@@ -101,6 +111,7 @@ namespace SDiZO_3.Knapsack
                 sb.Append("Wartość/waga." + Environment.NewLine);
             }
             sb.Append("Pojemność plecaka: " + data.Capacity + Environment.NewLine);
+            sb.Append("Wypełnienie plecaka: " + chosenItems.Sum(o => o.Size) + "/" + data.Capacity + Environment.NewLine);
             sb.Append("Suma wartości: " + chosenItems.Sum(o => o.Value) + Environment.NewLine);
             sb.Append("Wybrane przedmioty: " + Environment.NewLine);
 

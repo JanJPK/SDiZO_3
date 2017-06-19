@@ -36,17 +36,22 @@
             this.buttonDisplayData = new System.Windows.Forms.Button();
             this.textBoxLoadDataFilename = new System.Windows.Forms.TextBox();
             this.groupBoxKnapsack = new System.Windows.Forms.GroupBox();
+            this.buttonKnapsackGreedyR = new System.Windows.Forms.Button();
+            this.textBoxKnapsackGreedyR = new System.Windows.Forms.TextBox();
+            this.checkBoxKnapsackGreedyR = new System.Windows.Forms.CheckBox();
+            this.buttonKnapsackAll = new System.Windows.Forms.Button();
             this.textBoxKnapsackBruteforce = new System.Windows.Forms.TextBox();
             this.checkBoxKnapsackBruteforce = new System.Windows.Forms.CheckBox();
             this.buttonKnapsackBruteforce = new System.Windows.Forms.Button();
-            this.textBoxKnapsackGreedy = new System.Windows.Forms.TextBox();
-            this.checkBoxKnapsackGreedy = new System.Windows.Forms.CheckBox();
+            this.textBoxKnapsackGreedyW = new System.Windows.Forms.TextBox();
+            this.checkBoxKnapsackGreedyW = new System.Windows.Forms.CheckBox();
             this.checkBoxKnapsackDynamic = new System.Windows.Forms.CheckBox();
-            this.buttonKnapsackGreedy = new System.Windows.Forms.Button();
+            this.buttonKnapsackGreedyW = new System.Windows.Forms.Button();
             this.textBoxKnapsackDynamic = new System.Windows.Forms.TextBox();
             this.buttonKnapsackDynamic = new System.Windows.Forms.Button();
             this.buttonKnapsackStart = new System.Windows.Forms.Button();
             this.groupBoxSalesman = new System.Windows.Forms.GroupBox();
+            this.buttonSalesmanAll = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBoxSalesmanBruteforce = new System.Windows.Forms.CheckBox();
@@ -61,15 +66,20 @@
             this.buttonSalesmanTwoOpt = new System.Windows.Forms.Button();
             this.buttonSalesman = new System.Windows.Forms.Button();
             this.groupBoxCreate = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.checkBoxCreateGraphDirected = new System.Windows.Forms.CheckBox();
-            this.buttonCreateNewGraph = new System.Windows.Forms.Button();
-            this.radioButtonKnapsackGreedyWeight = new System.Windows.Forms.RadioButton();
-            this.radioButtonKnapsackGreedyRatio = new System.Windows.Forms.RadioButton();
+            this.radioButtonDataGeneratorSalesman = new System.Windows.Forms.RadioButton();
+            this.radioButtonDataGeneratorKnapsack = new System.Windows.Forms.RadioButton();
+            this.textBoxDataGeneratorSize = new System.Windows.Forms.TextBox();
+            this.buttonDataGenerator = new System.Windows.Forms.Button();
+            this.textBoxDataGeneratorSizeKnapsack = new System.Windows.Forms.TextBox();
+            this.groupBoxRepeat = new System.Windows.Forms.GroupBox();
+            this.textBoxRepeatNew = new System.Windows.Forms.TextBox();
+            this.textBoxRepeatCurrent = new System.Windows.Forms.TextBox();
+            this.buttonRepeatChange = new System.Windows.Forms.Button();
             this.groupBoxLoadData.SuspendLayout();
             this.groupBoxKnapsack.SuspendLayout();
             this.groupBoxSalesman.SuspendLayout();
             this.groupBoxCreate.SuspendLayout();
+            this.groupBoxRepeat.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxLoadData
@@ -145,19 +155,22 @@
             this.textBoxLoadDataFilename.Name = "textBoxLoadDataFilename";
             this.textBoxLoadDataFilename.Size = new System.Drawing.Size(70, 20);
             this.textBoxLoadDataFilename.TabIndex = 0;
+            this.textBoxLoadDataFilename.TextChanged += new System.EventHandler(this.textBoxLoadDataFilename_TextChanged);
             // 
             // groupBoxKnapsack
             // 
             this.groupBoxKnapsack.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.groupBoxKnapsack.Controls.Add(this.radioButtonKnapsackGreedyRatio);
-            this.groupBoxKnapsack.Controls.Add(this.radioButtonKnapsackGreedyWeight);
+            this.groupBoxKnapsack.Controls.Add(this.buttonKnapsackGreedyR);
+            this.groupBoxKnapsack.Controls.Add(this.textBoxKnapsackGreedyR);
+            this.groupBoxKnapsack.Controls.Add(this.checkBoxKnapsackGreedyR);
+            this.groupBoxKnapsack.Controls.Add(this.buttonKnapsackAll);
             this.groupBoxKnapsack.Controls.Add(this.textBoxKnapsackBruteforce);
             this.groupBoxKnapsack.Controls.Add(this.checkBoxKnapsackBruteforce);
             this.groupBoxKnapsack.Controls.Add(this.buttonKnapsackBruteforce);
-            this.groupBoxKnapsack.Controls.Add(this.textBoxKnapsackGreedy);
-            this.groupBoxKnapsack.Controls.Add(this.checkBoxKnapsackGreedy);
+            this.groupBoxKnapsack.Controls.Add(this.textBoxKnapsackGreedyW);
+            this.groupBoxKnapsack.Controls.Add(this.checkBoxKnapsackGreedyW);
             this.groupBoxKnapsack.Controls.Add(this.checkBoxKnapsackDynamic);
-            this.groupBoxKnapsack.Controls.Add(this.buttonKnapsackGreedy);
+            this.groupBoxKnapsack.Controls.Add(this.buttonKnapsackGreedyW);
             this.groupBoxKnapsack.Controls.Add(this.textBoxKnapsackDynamic);
             this.groupBoxKnapsack.Controls.Add(this.buttonKnapsackDynamic);
             this.groupBoxKnapsack.Controls.Add(this.buttonKnapsackStart);
@@ -167,6 +180,43 @@
             this.groupBoxKnapsack.TabIndex = 7;
             this.groupBoxKnapsack.TabStop = false;
             this.groupBoxKnapsack.Text = "Plecak";
+            // 
+            // buttonKnapsackGreedyR
+            // 
+            this.buttonKnapsackGreedyR.Location = new System.Drawing.Point(178, 66);
+            this.buttonKnapsackGreedyR.Name = "buttonKnapsackGreedyR";
+            this.buttonKnapsackGreedyR.Size = new System.Drawing.Size(70, 23);
+            this.buttonKnapsackGreedyR.TabIndex = 23;
+            this.buttonKnapsackGreedyR.Text = "Wypisz";
+            this.buttonKnapsackGreedyR.UseVisualStyleBackColor = true;
+            this.buttonKnapsackGreedyR.Click += new System.EventHandler(this.buttonKnapsackGreedyR_Click);
+            // 
+            // textBoxKnapsackGreedyR
+            // 
+            this.textBoxKnapsackGreedyR.Location = new System.Drawing.Point(85, 68);
+            this.textBoxKnapsackGreedyR.Name = "textBoxKnapsackGreedyR";
+            this.textBoxKnapsackGreedyR.Size = new System.Drawing.Size(90, 20);
+            this.textBoxKnapsackGreedyR.TabIndex = 22;
+            // 
+            // checkBoxKnapsackGreedyR
+            // 
+            this.checkBoxKnapsackGreedyR.AutoSize = true;
+            this.checkBoxKnapsackGreedyR.Location = new System.Drawing.Point(12, 70);
+            this.checkBoxKnapsackGreedyR.Name = "checkBoxKnapsackGreedyR";
+            this.checkBoxKnapsackGreedyR.Size = new System.Drawing.Size(71, 17);
+            this.checkBoxKnapsackGreedyR.TabIndex = 21;
+            this.checkBoxKnapsackGreedyR.Text = "Greedy R";
+            this.checkBoxKnapsackGreedyR.UseVisualStyleBackColor = true;
+            // 
+            // buttonKnapsackAll
+            // 
+            this.buttonKnapsackAll.Location = new System.Drawing.Point(178, 117);
+            this.buttonKnapsackAll.Name = "buttonKnapsackAll";
+            this.buttonKnapsackAll.Size = new System.Drawing.Size(70, 23);
+            this.buttonKnapsackAll.TabIndex = 20;
+            this.buttonKnapsackAll.Text = "Wszystkie";
+            this.buttonKnapsackAll.UseVisualStyleBackColor = true;
+            this.buttonKnapsackAll.Click += new System.EventHandler(this.buttonKnapsackAll_Click);
             // 
             // textBoxKnapsackBruteforce
             // 
@@ -195,22 +245,22 @@
             this.buttonKnapsackBruteforce.UseVisualStyleBackColor = true;
             this.buttonKnapsackBruteforce.Click += new System.EventHandler(this.buttonKnapsackBruteforce_Click);
             // 
-            // textBoxKnapsackGreedy
+            // textBoxKnapsackGreedyW
             // 
-            this.textBoxKnapsackGreedy.Location = new System.Drawing.Point(85, 42);
-            this.textBoxKnapsackGreedy.Name = "textBoxKnapsackGreedy";
-            this.textBoxKnapsackGreedy.Size = new System.Drawing.Size(90, 20);
-            this.textBoxKnapsackGreedy.TabIndex = 14;
+            this.textBoxKnapsackGreedyW.Location = new System.Drawing.Point(85, 42);
+            this.textBoxKnapsackGreedyW.Name = "textBoxKnapsackGreedyW";
+            this.textBoxKnapsackGreedyW.Size = new System.Drawing.Size(90, 20);
+            this.textBoxKnapsackGreedyW.TabIndex = 14;
             // 
-            // checkBoxKnapsackGreedy
+            // checkBoxKnapsackGreedyW
             // 
-            this.checkBoxKnapsackGreedy.AutoSize = true;
-            this.checkBoxKnapsackGreedy.Location = new System.Drawing.Point(12, 42);
-            this.checkBoxKnapsackGreedy.Name = "checkBoxKnapsackGreedy";
-            this.checkBoxKnapsackGreedy.Size = new System.Drawing.Size(60, 17);
-            this.checkBoxKnapsackGreedy.TabIndex = 13;
-            this.checkBoxKnapsackGreedy.Text = "Greedy";
-            this.checkBoxKnapsackGreedy.UseVisualStyleBackColor = true;
+            this.checkBoxKnapsackGreedyW.AutoSize = true;
+            this.checkBoxKnapsackGreedyW.Location = new System.Drawing.Point(12, 44);
+            this.checkBoxKnapsackGreedyW.Name = "checkBoxKnapsackGreedyW";
+            this.checkBoxKnapsackGreedyW.Size = new System.Drawing.Size(74, 17);
+            this.checkBoxKnapsackGreedyW.TabIndex = 13;
+            this.checkBoxKnapsackGreedyW.Text = "Greedy W";
+            this.checkBoxKnapsackGreedyW.UseVisualStyleBackColor = true;
             // 
             // checkBoxKnapsackDynamic
             // 
@@ -222,15 +272,15 @@
             this.checkBoxKnapsackDynamic.Text = "Dynamic";
             this.checkBoxKnapsackDynamic.UseVisualStyleBackColor = true;
             // 
-            // buttonKnapsackGreedy
+            // buttonKnapsackGreedyW
             // 
-            this.buttonKnapsackGreedy.Location = new System.Drawing.Point(178, 40);
-            this.buttonKnapsackGreedy.Name = "buttonKnapsackGreedy";
-            this.buttonKnapsackGreedy.Size = new System.Drawing.Size(70, 23);
-            this.buttonKnapsackGreedy.TabIndex = 11;
-            this.buttonKnapsackGreedy.Text = "Wypisz";
-            this.buttonKnapsackGreedy.UseVisualStyleBackColor = true;
-            this.buttonKnapsackGreedy.Click += new System.EventHandler(this.buttonKnapsackGreedy_Click);
+            this.buttonKnapsackGreedyW.Location = new System.Drawing.Point(178, 40);
+            this.buttonKnapsackGreedyW.Name = "buttonKnapsackGreedyW";
+            this.buttonKnapsackGreedyW.Size = new System.Drawing.Size(70, 23);
+            this.buttonKnapsackGreedyW.TabIndex = 11;
+            this.buttonKnapsackGreedyW.Text = "Wypisz";
+            this.buttonKnapsackGreedyW.UseVisualStyleBackColor = true;
+            this.buttonKnapsackGreedyW.Click += new System.EventHandler(this.buttonKnapsackGreedyW_Click);
             // 
             // textBoxKnapsackDynamic
             // 
@@ -262,6 +312,7 @@
             // groupBoxSalesman
             // 
             this.groupBoxSalesman.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.groupBoxSalesman.Controls.Add(this.buttonSalesmanAll);
             this.groupBoxSalesman.Controls.Add(this.textBox4);
             this.groupBoxSalesman.Controls.Add(this.checkBox3);
             this.groupBoxSalesman.Controls.Add(this.checkBoxSalesmanBruteforce);
@@ -281,6 +332,16 @@
             this.groupBoxSalesman.TabIndex = 15;
             this.groupBoxSalesman.TabStop = false;
             this.groupBoxSalesman.Text = "Komiwojażer";
+            // 
+            // buttonSalesmanAll
+            // 
+            this.buttonSalesmanAll.Location = new System.Drawing.Point(178, 117);
+            this.buttonSalesmanAll.Name = "buttonSalesmanAll";
+            this.buttonSalesmanAll.Size = new System.Drawing.Size(70, 23);
+            this.buttonSalesmanAll.TabIndex = 21;
+            this.buttonSalesmanAll.Text = "Wszystkie";
+            this.buttonSalesmanAll.UseVisualStyleBackColor = true;
+            this.buttonSalesmanAll.Click += new System.EventHandler(this.buttonSalesmanAll_Click);
             // 
             // textBox4
             // 
@@ -402,9 +463,11 @@
             // groupBoxCreate
             // 
             this.groupBoxCreate.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.groupBoxCreate.Controls.Add(this.textBox1);
-            this.groupBoxCreate.Controls.Add(this.checkBoxCreateGraphDirected);
-            this.groupBoxCreate.Controls.Add(this.buttonCreateNewGraph);
+            this.groupBoxCreate.Controls.Add(this.textBoxDataGeneratorSizeKnapsack);
+            this.groupBoxCreate.Controls.Add(this.radioButtonDataGeneratorSalesman);
+            this.groupBoxCreate.Controls.Add(this.radioButtonDataGeneratorKnapsack);
+            this.groupBoxCreate.Controls.Add(this.textBoxDataGeneratorSize);
+            this.groupBoxCreate.Controls.Add(this.buttonDataGenerator);
             this.groupBoxCreate.Location = new System.Drawing.Point(12, 408);
             this.groupBoxCreate.Name = "groupBoxCreate";
             this.groupBoxCreate.Size = new System.Drawing.Size(259, 82);
@@ -412,59 +475,96 @@
             this.groupBoxCreate.TabStop = false;
             this.groupBoxCreate.Text = "Tworzenie danych";
             // 
-            // textBox1
+            // radioButtonDataGeneratorSalesman
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(70, 20);
-            this.textBox1.TabIndex = 15;
+            this.radioButtonDataGeneratorSalesman.AutoSize = true;
+            this.radioButtonDataGeneratorSalesman.Location = new System.Drawing.Point(169, 45);
+            this.radioButtonDataGeneratorSalesman.Name = "radioButtonDataGeneratorSalesman";
+            this.radioButtonDataGeneratorSalesman.Size = new System.Drawing.Size(84, 17);
+            this.radioButtonDataGeneratorSalesman.TabIndex = 8;
+            this.radioButtonDataGeneratorSalesman.TabStop = true;
+            this.radioButtonDataGeneratorSalesman.Text = "Komiwojażer";
+            this.radioButtonDataGeneratorSalesman.UseVisualStyleBackColor = true;
             // 
-            // checkBoxCreateGraphDirected
+            // radioButtonDataGeneratorKnapsack
             // 
-            this.checkBoxCreateGraphDirected.AutoSize = true;
-            this.checkBoxCreateGraphDirected.Location = new System.Drawing.Point(124, 21);
-            this.checkBoxCreateGraphDirected.Name = "checkBoxCreateGraphDirected";
-            this.checkBoxCreateGraphDirected.Size = new System.Drawing.Size(81, 17);
-            this.checkBoxCreateGraphDirected.TabIndex = 6;
-            this.checkBoxCreateGraphDirected.Text = "Skierowany";
-            this.checkBoxCreateGraphDirected.UseVisualStyleBackColor = true;
+            this.radioButtonDataGeneratorKnapsack.AutoSize = true;
+            this.radioButtonDataGeneratorKnapsack.Location = new System.Drawing.Point(169, 22);
+            this.radioButtonDataGeneratorKnapsack.Name = "radioButtonDataGeneratorKnapsack";
+            this.radioButtonDataGeneratorKnapsack.Size = new System.Drawing.Size(58, 17);
+            this.radioButtonDataGeneratorKnapsack.TabIndex = 7;
+            this.radioButtonDataGeneratorKnapsack.TabStop = true;
+            this.radioButtonDataGeneratorKnapsack.Text = "Plecak";
+            this.radioButtonDataGeneratorKnapsack.UseVisualStyleBackColor = true;
             // 
-            // buttonCreateNewGraph
+            // textBoxDataGeneratorSize
             // 
-            this.buttonCreateNewGraph.Location = new System.Drawing.Point(6, 45);
-            this.buttonCreateNewGraph.Name = "buttonCreateNewGraph";
-            this.buttonCreateNewGraph.Size = new System.Drawing.Size(70, 23);
-            this.buttonCreateNewGraph.TabIndex = 4;
-            this.buttonCreateNewGraph.Text = "Twórz";
-            this.buttonCreateNewGraph.UseVisualStyleBackColor = true;
+            this.textBoxDataGeneratorSize.Location = new System.Drawing.Point(6, 19);
+            this.textBoxDataGeneratorSize.Name = "textBoxDataGeneratorSize";
+            this.textBoxDataGeneratorSize.Size = new System.Drawing.Size(70, 20);
+            this.textBoxDataGeneratorSize.TabIndex = 15;
             // 
-            // radioButtonKnapsackGreedyWeight
+            // buttonDataGenerator
             // 
-            this.radioButtonKnapsackGreedyWeight.AutoSize = true;
-            this.radioButtonKnapsackGreedyWeight.Location = new System.Drawing.Point(85, 68);
-            this.radioButtonKnapsackGreedyWeight.Name = "radioButtonKnapsackGreedyWeight";
-            this.radioButtonKnapsackGreedyWeight.Size = new System.Drawing.Size(36, 17);
-            this.radioButtonKnapsackGreedyWeight.TabIndex = 18;
-            this.radioButtonKnapsackGreedyWeight.TabStop = true;
-            this.radioButtonKnapsackGreedyWeight.Text = "W";
-            this.radioButtonKnapsackGreedyWeight.UseVisualStyleBackColor = true;
+            this.buttonDataGenerator.Location = new System.Drawing.Point(6, 45);
+            this.buttonDataGenerator.Name = "buttonDataGenerator";
+            this.buttonDataGenerator.Size = new System.Drawing.Size(70, 23);
+            this.buttonDataGenerator.TabIndex = 4;
+            this.buttonDataGenerator.Text = "Twórz";
+            this.buttonDataGenerator.UseVisualStyleBackColor = true;
+            this.buttonDataGenerator.Click += new System.EventHandler(this.buttonDataGenerator_Click);
             // 
-            // radioButtonKnapsackGreedyRatio
+            // textBoxDataGeneratorSizeKnapsack
             // 
-            this.radioButtonKnapsackGreedyRatio.AutoSize = true;
-            this.radioButtonKnapsackGreedyRatio.Location = new System.Drawing.Point(126, 68);
-            this.radioButtonKnapsackGreedyRatio.Name = "radioButtonKnapsackGreedyRatio";
-            this.radioButtonKnapsackGreedyRatio.Size = new System.Drawing.Size(49, 17);
-            this.radioButtonKnapsackGreedyRatio.TabIndex = 19;
-            this.radioButtonKnapsackGreedyRatio.TabStop = true;
-            this.radioButtonKnapsackGreedyRatio.Text = "W/R";
-            this.radioButtonKnapsackGreedyRatio.UseVisualStyleBackColor = true;
+            this.textBoxDataGeneratorSizeKnapsack.Location = new System.Drawing.Point(82, 19);
+            this.textBoxDataGeneratorSizeKnapsack.Name = "textBoxDataGeneratorSizeKnapsack";
+            this.textBoxDataGeneratorSizeKnapsack.Size = new System.Drawing.Size(70, 20);
+            this.textBoxDataGeneratorSizeKnapsack.TabIndex = 16;
+            // 
+            // groupBoxRepeat
+            // 
+            this.groupBoxRepeat.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.groupBoxRepeat.Controls.Add(this.textBoxRepeatNew);
+            this.groupBoxRepeat.Controls.Add(this.textBoxRepeatCurrent);
+            this.groupBoxRepeat.Controls.Add(this.buttonRepeatChange);
+            this.groupBoxRepeat.Location = new System.Drawing.Point(12, 496);
+            this.groupBoxRepeat.Name = "groupBoxRepeat";
+            this.groupBoxRepeat.Size = new System.Drawing.Size(259, 51);
+            this.groupBoxRepeat.TabIndex = 17;
+            this.groupBoxRepeat.TabStop = false;
+            this.groupBoxRepeat.Text = "Mnożnik";
+            // 
+            // textBoxRepeatNew
+            // 
+            this.textBoxRepeatNew.Location = new System.Drawing.Point(82, 19);
+            this.textBoxRepeatNew.Name = "textBoxRepeatNew";
+            this.textBoxRepeatNew.Size = new System.Drawing.Size(70, 20);
+            this.textBoxRepeatNew.TabIndex = 16;
+            // 
+            // textBoxRepeatCurrent
+            // 
+            this.textBoxRepeatCurrent.Location = new System.Drawing.Point(6, 19);
+            this.textBoxRepeatCurrent.Name = "textBoxRepeatCurrent";
+            this.textBoxRepeatCurrent.ReadOnly = true;
+            this.textBoxRepeatCurrent.Size = new System.Drawing.Size(70, 20);
+            this.textBoxRepeatCurrent.TabIndex = 15;
+            // 
+            // buttonRepeatChange
+            // 
+            this.buttonRepeatChange.Location = new System.Drawing.Point(157, 19);
+            this.buttonRepeatChange.Name = "buttonRepeatChange";
+            this.buttonRepeatChange.Size = new System.Drawing.Size(70, 23);
+            this.buttonRepeatChange.TabIndex = 4;
+            this.buttonRepeatChange.Text = "Zmień";
+            this.buttonRepeatChange.UseVisualStyleBackColor = true;
+            this.buttonRepeatChange.Click += new System.EventHandler(this.buttonRepeatChange_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 503);
+            this.ClientSize = new System.Drawing.Size(284, 561);
+            this.Controls.Add(this.groupBoxRepeat);
             this.Controls.Add(this.groupBoxCreate);
             this.Controls.Add(this.groupBoxSalesman);
             this.Controls.Add(this.groupBoxKnapsack);
@@ -479,6 +579,8 @@
             this.groupBoxSalesman.PerformLayout();
             this.groupBoxCreate.ResumeLayout(false);
             this.groupBoxCreate.PerformLayout();
+            this.groupBoxRepeat.ResumeLayout(false);
+            this.groupBoxRepeat.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -493,10 +595,10 @@
         private System.Windows.Forms.Label labelMatrix;
         private System.Windows.Forms.Button buttonDisplayData;
         private System.Windows.Forms.GroupBox groupBoxKnapsack;
-        private System.Windows.Forms.TextBox textBoxKnapsackGreedy;
-        private System.Windows.Forms.CheckBox checkBoxKnapsackGreedy;
+        private System.Windows.Forms.TextBox textBoxKnapsackGreedyW;
+        private System.Windows.Forms.CheckBox checkBoxKnapsackGreedyW;
         private System.Windows.Forms.CheckBox checkBoxKnapsackDynamic;
-        private System.Windows.Forms.Button buttonKnapsackGreedy;
+        private System.Windows.Forms.Button buttonKnapsackGreedyW;
         private System.Windows.Forms.TextBox textBoxKnapsackDynamic;
         private System.Windows.Forms.Button buttonKnapsackDynamic;
         private System.Windows.Forms.Button buttonKnapsackStart;
@@ -509,9 +611,8 @@
         private System.Windows.Forms.Button buttonSalesmanTwoOpt;
         private System.Windows.Forms.Button buttonSalesman;
         private System.Windows.Forms.GroupBox groupBoxCreate;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.CheckBox checkBoxCreateGraphDirected;
-        private System.Windows.Forms.Button buttonCreateNewGraph;
+        private System.Windows.Forms.TextBox textBoxDataGeneratorSize;
+        private System.Windows.Forms.Button buttonDataGenerator;
         private System.Windows.Forms.TextBox textBoxKnapsackBruteforce;
         private System.Windows.Forms.CheckBox checkBoxKnapsackBruteforce;
         private System.Windows.Forms.Button buttonKnapsackBruteforce;
@@ -521,8 +622,18 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBoxSalesmanBruteforce;
         private System.Windows.Forms.Button buttonSalesmanBruteforce;
-        private System.Windows.Forms.RadioButton radioButtonKnapsackGreedyRatio;
-        private System.Windows.Forms.RadioButton radioButtonKnapsackGreedyWeight;
+        private System.Windows.Forms.Button buttonKnapsackAll;
+        private System.Windows.Forms.Button buttonSalesmanAll;
+        private System.Windows.Forms.RadioButton radioButtonDataGeneratorSalesman;
+        private System.Windows.Forms.RadioButton radioButtonDataGeneratorKnapsack;
+        private System.Windows.Forms.Button buttonKnapsackGreedyR;
+        private System.Windows.Forms.TextBox textBoxKnapsackGreedyR;
+        private System.Windows.Forms.CheckBox checkBoxKnapsackGreedyR;
+        private System.Windows.Forms.TextBox textBoxDataGeneratorSizeKnapsack;
+        private System.Windows.Forms.GroupBox groupBoxRepeat;
+        private System.Windows.Forms.TextBox textBoxRepeatNew;
+        private System.Windows.Forms.TextBox textBoxRepeatCurrent;
+        private System.Windows.Forms.Button buttonRepeatChange;
     }
 }
 

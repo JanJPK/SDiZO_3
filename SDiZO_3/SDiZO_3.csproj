@@ -67,6 +67,8 @@
     <Compile Include="Salesman\SalesmanData.cs" />
     <Compile Include="Salesman\SalesmanTwoOpt.cs" />
     <Compile Include="Salesman\SalesmanGreedy.cs" />
+    <Compile Include="Utility\Clock.cs" />
+    <Compile Include="Utility\DataGenerator.cs" />
     <Compile Include="Utility\ISDiZOable.cs" />
     <Compile Include="Utility\MyGenerics.cs" />
     <EmbeddedResource Include="FormDisplay.resx">

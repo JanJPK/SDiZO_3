@@ -8,7 +8,7 @@ using SDiZO_3.Utility;
 
 namespace SDiZO_3.Knapsack
 {
-    class KnapsackBruteforce
+    class KnapsackBruteforce : ISDiZOable
     {
         /*
          * Wersja optymalna - sprawdza wszystkie kombinacje i wybiera najlepszą.
@@ -119,6 +119,7 @@ namespace SDiZO_3.Knapsack
             StringBuilder sb = new StringBuilder();
             sb.Append("Problem plecakowy - algorytm brute-force." + Environment.NewLine);
             sb.Append("Pojemność plecaka: " + data.Capacity + Environment.NewLine);
+            sb.Append("Wypełnienie plecaka: " + chosenItems.Sum(o => o.Size) + "/" + data.Capacity + Environment.NewLine);
             sb.Append("Suma wartości: " + chosenItems.Sum(o => o.Value) + Environment.NewLine);
             sb.Append("Wybrane przedmioty: " + Environment.NewLine);
 

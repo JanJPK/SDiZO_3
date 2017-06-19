@@ -7,7 +7,7 @@ using SDiZO_3.Utility;
 
 namespace SDiZO_3.Knapsack
 {
-    class KnapsackDynamic
+    class KnapsackDynamic : ISDiZOable
     {
         /*
          * Wersja dynamiczna - rozwiązuje podproblemy.
@@ -139,6 +139,7 @@ namespace SDiZO_3.Knapsack
             StringBuilder sb = new StringBuilder();
             sb.Append("Problem plecakowy - programowanie dynamiczne." + Environment.NewLine);
             sb.Append("Pojemność plecaka: " + data.Capacity + Environment.NewLine);
+            sb.Append("Wypełnienie plecaka: " + chosenItems.Sum(o => o.Size) + "/" + data.Capacity + Environment.NewLine);
             sb.Append("Suma wartości: " + chosenItems.Sum(o => o.Value) + Environment.NewLine);
             sb.Append("Wybrane przedmioty: " + Environment.NewLine);
 
