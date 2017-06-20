@@ -65,11 +65,13 @@ namespace SDiZO_3.Salesman
         {
             // Zmienne na obecnie przetwarzaną trasę i nową.
             List<int> currentRoute = new List<int>();
-            // Startowa kombinacja = posortowana rosnąco.
+            // Startowa kombinacja = posortowana rosnąco i przemieszana.
             for (int i = 0; i < data.Size - 1; i++)
             {
                 currentRoute.Add(i + 1);
             }
+            MyGenerics.ShuffleList(currentRoute);
+
             List<int> newRoute;
 
             int currentDistance = data.PermutationDistance(currentRoute);

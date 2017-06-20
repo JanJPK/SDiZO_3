@@ -36,13 +36,12 @@ namespace SDiZO_3.Salesman
         // Praca.
         public void Work()
         {
-            // Startowa kombinacja = posortowana rosnąco.
-            // TODO: połączenie TwoOpt(Greedy)
+            // Startowa kombinacja = posortowana rosnąco i przemieszana.
             for (int i = 0; i < data.Size - 1; i++)
             {
                 minRoute.Add(i + 1);
             }
-
+            minRoute = MyGenerics.ShuffleList(minRoute);
             // Wykonuje tak długo aż droga zostaje polepszana.
             // improvementsCount - tylko do debugu gdy sprawdzałem z ciekawości ile razy poprawiał ścieżke.
             // int improvementsCount = 0;

@@ -413,6 +413,11 @@ namespace SDiZO_3
                 FormDisplay fD = new FormDisplay(salesmanGreedy.ToString());
                 fD.Show();
             }
+            if (salesmanAnnealing != null)
+            {
+                FormDisplay fD = new FormDisplay(salesmanAnnealing.ToString());
+                fD.Show();
+            }
         }
         //
         //

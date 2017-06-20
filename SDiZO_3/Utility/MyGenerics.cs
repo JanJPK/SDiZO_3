@@ -9,7 +9,7 @@ namespace SDiZO_3.Utility
     // Proste generyki które będą mi potrzebne.
     public static class MyGenerics
     {
-
+        private static Random rng = new Random();
         // Zamiana.
         public static void Swap<T>(ref T a, ref T b)
         {
@@ -26,6 +26,14 @@ namespace SDiZO_3.Utility
             //return (a > b) ? a : b;
             return a.CompareTo(b) > 0 ? a : b;
         }
+
+        // Mieszanie listy.
+        public static List<T> ShuffleList<T>(List<T> list)
+        {
+            List<T> shuffledList = list.OrderBy(t => rng.Next()).ToList();
+            return shuffledList;
+        }
+
 
         // Silnia (rekursywnie)
         private static int Factorial(int n)
