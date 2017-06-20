@@ -36,6 +36,8 @@ namespace SDiZO_3.Salesman
         // Praca.
         public void Work()
         {
+            // Startowa kombinacja = posortowana rosnąco.
+            // TODO: połączenie TwoOpt(Greedy)
             for (int i = 0; i < data.Size - 1; i++)
             {
                 minRoute.Add(i + 1);

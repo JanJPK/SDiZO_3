@@ -10,12 +10,13 @@ namespace SDiZO_3.Knapsack
     class KnapsackDynamic : ISDiZOable
     {
         /*
-         * Wersja dynamiczna - rozwiązuje podproblemy.
+         * Wersja dynamiczna - rozwiązuje podproblemy; wynik jest dokładny.
+         * Złożoność O(n*b) - n ilość przedmiotów; b - pojemność plecaka.
          * Macierz gdzie kolumny oznaczają dostępne przedmioty a wiersze pojemność:
          *      wiersz 5    - przedmioty od 0 do 4 są dostępne.
-         *      kolumna 6   - plecak ma pojemność 6.
+         *      kolumna 6   - plecak ma pojemność 5.
          *      
-         * Rozwiązanie znajduje się w rogu czyli maksymalnej pojemności i wszystkich przedmiotach dostepnych.
+         * Rozwiązanie znajduje się w rogu czyli maksymalnej pojemności i przy wszystkich przedmiotach dostepnych.
          */
 
         // Dane wejściowe.
@@ -53,8 +54,9 @@ namespace SDiZO_3.Knapsack
                         // Czy nowy przedmiot zmieści się?
                         if (data.Items[i - 1].Size <= j)
                         {
-                            //matrix[i, j] = MyGenerics.ReturnGreater(data.Items[i - 1].Value + matrix[i - 1, (j - data.Items[i - 1].Size)],
-                            //   matrix[i - 1, j]);
+                            // stara wersja
+                            // matrix[i, j] = MyGenerics.ReturnGreater(data.Items[i - 1].Value + matrix[i - 1, (j - data.Items[i - 1].Size)],
+                            // matrix[i - 1, j]);
 
                             int a = data.Items[i - 1].Value + matrix[i - 1, (j - data.Items[i - 1].Size)].Value;
                             int b = matrix[i - 1, j].Value;
@@ -87,20 +89,19 @@ namespace SDiZO_3.Knapsack
 
         // Postawiłem z ciekawości na podejście obiektowe - każda komórka w macierzy jest obiektem który zawiera indeksy swoich przedmiotów i sumę wartości.
         // Takie podejście pozwala szybko sprawdzić co w której komórce jest wybrane.
-        // Jak z wydajnością? będzie czas to sprawdzę.
+        // Jak z wydajnością? będzie czas to sprawdzę i porównam.
         private class MatrixCell
         {
+            // Indeksy przedmiotów.
             public List<int> Items { get; private set; }
 
+            // Suma wartości.
             public int Value { get; set; }
 
+            // Odnośnik do danych.
             private KnapsackData data;
-            public void AddItem(int index)
-            {
-                Items.Add(index);
-                Value = Value + data.Items[index].Value;
-            }
 
+            // Konstruktor zwyczajny.
             public MatrixCell(int value, KnapsackData data)
             {
                 this.data = data;
@@ -108,6 +109,7 @@ namespace SDiZO_3.Knapsack
                 Items = new List<int>();
             }
 
+            // Konstruktor kopiujący.
             public MatrixCell(MatrixCell cloneBlueprint)
             {
                 data = cloneBlueprint.data;
@@ -115,6 +117,14 @@ namespace SDiZO_3.Knapsack
                 Items = new List<int>(cloneBlueprint.Items);
             }
 
+            // Dodawanie przedmiotu.
+            public void AddItem(int index)
+            {
+                Items.Add(index);
+                Value = Value + data.Items[index].Value;
+            }
+
+            // Zwaracanie jako string = po prostu wypis warości.
             public override string ToString()
             {
                 return Value.ToString();

@@ -27,7 +27,7 @@ namespace SDiZO_3.Knapsack
         // Lista wyjściowa.
         private List<KnapsackData.Item> chosenItems;
 
-        // Całkowity koszt chosenItems.
+        // Całkowita wartość chosenItems.
         private int chosenItemsSum;
 
         public KnapsackBruteforce(KnapsackData inputData)
@@ -35,10 +35,9 @@ namespace SDiZO_3.Knapsack
             data = inputData;
             chosenItems = new List<KnapsackData.Item>();
             chosenItemsSum = 0;
-            intToBinary(6);
         }
 
-        // Zwraca tablicę 32 true/false - postać bitowa.
+        // Zwraca tablicę 32 true/false - postać bitowa liczby integer jaką przyjmuje.
         private BitArray intToBinary(int number)
         {
             return new BitArray(new int[] { number });

@@ -28,24 +28,6 @@ namespace SDiZO_3.Knapsack
             {
                 Items.Add(new Item(inputList[i], inputList[i + 1]));
             }
-
-
-        }
-
-        // Konwersja do string.
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("Pojemność plecaka: " + Capacity + Environment.NewLine);
-            sb.Append("Ilość przedmiotów: " + ItemAmount + Environment.NewLine);
-            sb.Append("Dostępne przedmioty: " + Environment.NewLine);
-            int index = 0;
-            foreach (Item item in Items)
-            {
-                sb.Append(index + " - " + item + Environment.NewLine);
-                index++;
-            }
-            return sb.ToString();
         }
 
         // Klasa reprezentująca przedmiot.
@@ -71,8 +53,6 @@ namespace SDiZO_3.Knapsack
             public double ValueRatio()
             {
                 double ratio = Value / Size;
-                // Zaokrąglam do 2 miejsc po przecinku.
-                //return Math.Round(ratio, 2);
                 return ratio;
             }
 
@@ -83,6 +63,24 @@ namespace SDiZO_3.Knapsack
                 return "R: " + Size + "; W: " + Value + "; W/R: " + ValueRatio() + ";";
             }
         }
+
+        // Konwersja do string.
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Pojemność plecaka: " + Capacity + Environment.NewLine);
+            sb.Append("Ilość przedmiotów: " + ItemAmount + Environment.NewLine);
+            sb.Append("Dostępne przedmioty: " + Environment.NewLine);
+            int index = 0;
+            foreach (Item item in Items)
+            {
+                sb.Append(index + " - " + item + Environment.NewLine);
+                index++;
+            }
+            return sb.ToString();
+        }
+
+        
     }
 
 }

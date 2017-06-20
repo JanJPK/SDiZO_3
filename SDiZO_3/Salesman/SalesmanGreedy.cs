@@ -65,6 +65,7 @@ namespace SDiZO_3.Salesman
         {
             int closestCity = 0;
             int min = Int32.MaxValue;
+
             // Przeszukiwanie liniowe.
             // TODO: usprawnić.
             for (int i = 0; i < data.Size; i++)

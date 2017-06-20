@@ -32,12 +32,12 @@ namespace SDiZO_3
         private SalesmanBruteforce salesmanBruteforce;
         private SalesmanGreedy salesmanGreedy;
         private SalesmanTwoOpt salesmanTwoOpt;
-        //private SalesmanXX salesmanXX;
+        private SalesmanAnnealing salesmanAnnealing;
 
         private Clock salesmanBruteforceClock;
         private Clock salesmanGreedyClock;
         private Clock salesmanTwoOptClock;
-        //private Clock salesmanXXClock;
+        private Clock salesmanAnnealingClock;
 
         private KnapsackData knapsackData;
         private KnapsackBruteforce knapsackBruteforce;
@@ -50,6 +50,9 @@ namespace SDiZO_3
         private Clock knapsackGreedyRClock;
         private Clock knapsackDynamicClock;
 
+        // Parametry wyżarzania.
+        private double annealingTemperature;
+        private double annealingCooling;
 
         // Repetycja.
         private int repeat;
@@ -63,9 +66,10 @@ namespace SDiZO_3
             //textBoxLoadDataFilename.Text = "tsp_6_2";
             //radioButtonLoadDataSalesman.Checked = true;
 
-            checkBoxSalesmanTwoOpt.Checked = true;
-            checkBoxSalesmanGreedy.Checked = true;
-            checkBoxSalesmanBruteforce.Checked = true;
+            //checkBoxSalesmanTwoOpt.Checked = true;
+            //checkBoxSalesmanGreedy.Checked = true;
+            //checkBoxSalesmanBruteforce.Checked = true;
+            checkBoxSalesmanAnnealing.Checked = true;
 
             textBoxLoadDataFilename.Text = "ks_1";
             radioButtonLoadDataKnapsack.Checked = true;
@@ -79,6 +83,14 @@ namespace SDiZO_3
             textBoxDataGeneratorSizeKnapsack.Text = "100";
             radioButtonDataGeneratorKnapsack.Checked = true;
 
+            
+            annealingTemperature = 1000;
+            annealingCooling = 0.99;
+
+            textBoxSalesmanAnnealingTemperature.Text = "1000";
+            textBoxSalesmanAnnealingCooling.Text = "0,99";
+            textBoxSalesmanAnnealingIterations.Text = CalculateIterations(1000, 0.99).ToString();
+            
             repeat = 1;
             textBoxRepeatCurrent.Text = repeat.ToString();
         }
@@ -296,6 +308,20 @@ namespace SDiZO_3
                     textBoxSalesmanBruteforce.Text = salesmanBruteforceClock.Average().ToString();
                 }
 
+                if (checkBoxSalesmanAnnealing.Checked)
+                {
+                    for (int i = 0; i < repeat; i++)
+                    {
+                        salesmanAnnealing = new SalesmanAnnealing(salesmanData, annealingTemperature, annealingCooling);
+                        salesmanAnnealingClock = new Clock(salesmanAnnealing);
+                        salesmanAnnealingClock.Start();
+                        salesmanAnnealing.Work();
+                        salesmanAnnealingClock.Stop();
+                    }
+                    salesmanAnnealingClock.End();
+                    textBoxSalesmanAnnealing.Text = salesmanAnnealingClock.Average().ToString();
+                }
+
             }
             else
             {
@@ -343,6 +369,22 @@ namespace SDiZO_3
             if (salesmanTwoOpt != null)
             {
                 FormDisplay fD = new FormDisplay(salesmanTwoOpt.ToString());
+                fD.Show();
+            }
+            else
+            {
+                MessageBox.Show("Nie ma czego wyświetlać!", "Błąd",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        //
+        //
+        // Wyświetlanie wyniku komiwojażera - wyżarzanie.
+        private void buttonSalesmanAnnealing_Click(object sender, EventArgs e)
+        {
+            if (salesmanAnnealing != null)
+            {
+                FormDisplay fD = new FormDisplay(salesmanAnnealing.ToString());
                 fD.Show();
             }
             else
@@ -482,6 +524,67 @@ namespace SDiZO_3
         }
         //
         //
+        // Zmiana koloru textBox z temperaturą przy zmianie tekstu.
+        private void textBoxSalesmanAnnealingTemperature_TextChanged(object sender, EventArgs e)
+        {
+            textBoxSalesmanAnnealingTemperature.BackColor = SystemColors.Window;
+            textBoxSalesmanAnnealingIterations.BackColor = SystemColors.Window;
+        }
+        //
+        //
+        // Zmiana koloru textBox z mnożnikiem chłodzenia przy zmianie tekstu.
+        private void textBoxSalesmanAnnealingCooling_TextChanged(object sender, EventArgs e)
+        {
+            textBoxSalesmanAnnealingCooling.BackColor = SystemColors.Window;
+            textBoxSalesmanAnnealingIterations.BackColor = SystemColors.Window;
+        }
+        //
+        //
+        // Zapis parametrów wyżarzania.
+        private void buttonSalesmanAnnealingSave_Click(object sender, EventArgs e)
+        {
+            double newCooling;
+            double newTemperature;
+            if (!double.TryParse(textBoxSalesmanAnnealingCooling.Text, out newCooling))
+            {
+                MessageBox.Show("Nieprawidłowy mnożnik chłodzenia", "Błąd",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxSalesmanAnnealingCooling.BackColor = Color.MediumVioletRed;
+                newCooling = 0;
+            }
+            else
+            {
+                if (!(newCooling < 1))
+                {
+                    textBoxSalesmanAnnealingCooling.BackColor = Color.MediumVioletRed;
+                    newCooling = 0;
+                }
+                textBoxSalesmanAnnealingCooling.BackColor = Color.MediumAquamarine;
+            }
+
+
+            if (!double.TryParse(textBoxSalesmanAnnealingTemperature.Text, out newTemperature))
+            {
+                MessageBox.Show("Nieprawidłowa temperatura", "Błąd",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxSalesmanAnnealingTemperature.BackColor = Color.MediumVioletRed;
+                newTemperature = 0;
+            }
+            else
+            {
+                textBoxSalesmanAnnealingTemperature.BackColor = Color.MediumAquamarine;
+            }
+
+            if (newTemperature > 0 && newCooling > 0)
+            {
+                annealingCooling = newCooling;
+                annealingTemperature = newTemperature;
+                textBoxSalesmanAnnealingIterations.Text = CalculateIterations(newTemperature, newCooling).ToString();
+                textBoxSalesmanAnnealingIterations.BackColor = Color.MediumAquamarine;
+            }
+        }
+        //
+        //
         // ######## ######## ######## ######## Funkcje
         #region
 
@@ -539,6 +642,18 @@ namespace SDiZO_3
 
         }
 
+        // Szacowanie ilości iteracji dla wyżarzania.
+        private int CalculateIterations(double temperature, double cooling)
+        {
+            // Bardzo prymitywne.
+            int counter = 0;
+            while (temperature > 0.001)
+            {
+                temperature *= cooling;
+                counter++;
+            }
+            return counter;
+        }
 
         #endregion
 
