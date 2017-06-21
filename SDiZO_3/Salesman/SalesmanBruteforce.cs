@@ -13,6 +13,7 @@ namespace SDiZO_3.Salesman
          * Start od 0.
          * Wersja optymalna - sprawdza wszystkie kombinacje i wybiera najlepszą.
          * Paskudna złożoność obliczeniowa O(n!).
+         * Uwaga! EKSTREMALNIE nieefektywne pamięciowo! TODO: permutacje do całkowitego przerobienia.
          */
 
         // Lista z optymalną drogą.
@@ -45,12 +46,11 @@ namespace SDiZO_3.Salesman
             // Lista wszystkich permutacji.
             List<List<int>> permutations = MyGenerics.AllPermutations(route);
 
-            int permutationCost;
             // Sprawdzamy która permutacja jest "najtańsza".
             foreach (List<int> permutation in permutations)
             {
                 // Jeżeli koszt tej permutacji jest mniejszy od obecnego min, obecna permutacja = min.
-                permutationCost = data.PermutationDistance(permutation);
+                int permutationCost = data.PermutationDistance(permutation);
                 if (permutationCost < minDistance)
                 {
                     minRoute = permutation;
@@ -58,7 +58,6 @@ namespace SDiZO_3.Salesman
                 }
             }
         }
-
 
         // Zwracanie typu algorytmu jako string.
         public string Type()

@@ -48,29 +48,20 @@ namespace SDiZO_3.Knapsack
         {
             // Tworzenie tablicy tablic - tablica to postać bitowa obecnego indeksu.
             int twoPower = (int)Math.Pow(2, data.ItemAmount);
-            BitArray[] bitArrays = new BitArray[twoPower];
             for (int i = 0; i < twoPower; i++)
             {
-                bitArrays[i] = intToBinary(i);
-            }
-
-            // Sprawdzenie każdej kombinacji i wybranie najlepszej.
-            List<KnapsackData.Item> combination;
-            int combinationValue;
-            int combinationSize;
-            foreach (BitArray ba in bitArrays)
-            {
-                combination = new List<KnapsackData.Item>();
-                combinationValue = 0;
-                combinationSize = 0;
+                BitArray bitArray = intToBinary(i);
+                List <KnapsackData.Item> combination = new List<KnapsackData.Item>();
+                int combinationValue = 0;
+                int combinationSize = 0;
                 // Sprawdzenie każdego bitu od pierwszego do ilości przedmiotów.
-                for (int i = 0; i < data.ItemAmount; i++)
+                for (int j = 0; j < data.ItemAmount; j++)
                 {
-                    if (ba[i] == true)
+                    if (bitArray[j] == true)
                     {
-                        combination.Add(data.Items[i]);
-                        combinationValue += data.Items[i].Value;
-                        combinationSize += data.Items[i].Size;
+                        combination.Add(data.Items[j]);
+                        combinationValue += data.Items[j].Value;
+                        combinationSize += data.Items[j].Size;
                     }
 
                     // Jeżeli ta kombinacja zmieści się w plecaku...
@@ -83,9 +74,8 @@ namespace SDiZO_3.Knapsack
                             chosenItemsSum = combinationValue;
                         }
                     }
-                
-                }
 
+                }
             }
         }
 
