@@ -52,8 +52,10 @@ namespace SDiZO_3.Knapsack
             // Zwraca stosunek wartość/rozmiar.
             public double ValueRatio()
             {
-                double ratio = Value / Size;
-                return ratio;
+                // Uwaga! Przy dzieleniu int przez int C# traci ułamek -> trzeba zrobić cast do double przynajmniej jednej liczby.
+                double ratio = (double)Value / (double)Size;
+                // Zaokrąglane do 4 po przecinku.
+                return Math.Round(ratio, 4);
             }
 
             // Konwersja do string.
